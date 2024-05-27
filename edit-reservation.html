@@ -7,23 +7,50 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-      <!-- Header section containing the title and navigation menu -->
-      <header>
+    <!-- Header section containing the title and navigation menu -->
+    <header>
         <h1>Edit Reservation</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Login Page</a></li>
                 <li><a href="index2.html">Home</a></li>
+                <li><a href="reservation.html">Reservation</a></li>
+                <li><a href="View Reservation.html">View Reservation</a></li>
+                <li><a href="edit-reservation.html">Edit Reservation</a></li>
             </ul>
         </nav>
     </header>
 
-    <p>Add Necessary shit here</p>
-    
+    <!-- Main content section for editing reservations -->
+    <main>
+        <section class="edit-reservation">
+            <h2>Edit Your Reservation</h2>
+            <form action="/edit-reservation" method="POST">
+                <!-- Reservation ID input to fetch and edit specific reservation -->
+                <label for="reservation-id">Reservation ID:</label>
+                <input type="text" id="reservation-id" name="reservation-id" required>
+                
+                <!-- Laboratory selection dropdown -->
+                <label for="edit-lab">Select Laboratory:</label>
+                <select id="edit-lab" name="edit-lab" required>
+                    <option value="chemistry">Chemistry Lab</option>
+                    <option value="physics">Physics Lab</option>
+                    <option value="biology">Biology Lab</option>
+                </select>
+
+                <!-- Date input for selecting the new date -->
+                <label for="edit-date">Select New Date:</label>
+                <input type="date" id="edit-date" name="edit-date" required>
+
+                <!-- Submit button to update the reservation -->
+                <button type="submit">Update Reservation</button>
+            </form>
+        </section>
+    </main>
+
     <!-- Footer section with copyright information -->
     <footer>
         <p>&copy; 2024 Laboratory Reservation System. All rights reserved.</p>
     </footer>
 </body>
 </html>
-</body>
