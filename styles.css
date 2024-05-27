@@ -89,3 +89,8 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+.main-container {
+    height: calc(100vh - 150px); /* Adjust the height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+}

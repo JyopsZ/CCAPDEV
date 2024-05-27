@@ -57,42 +57,29 @@
             const loginForm = document.getElementById('loginForm');
             const email = document.getElementById('email');
             const password = document.getElementById('password');
-            const rememberMe = document.getElementById('remember');
             const loginMessage = document.getElementById('loginMessage');
 
             // Hardcoded users
             const users = [
                 
-                { email: 'student1@dlsu.edu.ph', password: 'student123', role: 'student' },
-                { email: 'labtech1@dlsu.edu.ph', password: 'lab123', role: 'labtech' }
+                { email: 'timmy_yap@dlsu.edu.ph', password: 'student123', role: 'student', firstName: 'Timmy', lastName: 'Yap', picLink: 'images/default.jpg'},
+                { email: 'labtech1@dlsu.edu.ph', password: 'lab123', role: 'labtech', firstName: 'Mykel', lastName: 'Tiu', picLink: 'images/default.jpg'}
             ];
-
-            loadRememberedEmail(email, rememberMe);
 
             loginForm.addEventListener('submit', function (event) {
                 
                 event.preventDefault();
-                handleLogin(email.value, password.value, rememberMe.checked, users, loginMessage);
+                handleLogin(email.value, password.value, users, loginMessage);
             });
         });
 
-        function loadRememberedEmail(email, rememberMe) {
-            
-            if (localStorage.getItem('rememberMe') === 'true') {
-                
-                email.value = localStorage.getItem('email');
-                rememberMe.checked = true;
-            }
-        }
-
-        function handleLogin(email, password, rememberMe, users, loginMessage) {
+        function handleLogin(email, password, users, loginMessage) {
             
             const user = authenticateUser(email, password, users);
 
             if (user) {
                 
-                handleRememberMe(email, rememberMe);
-                displayLoginMessage(`Welcome, ${user.role}!`, 'green', loginMessage);
+                //displayLoginMessage(`Welcome, ${user.firstName}!`, 'green', loginMessage);
 
                 if (user.role ==='student') {
                     
@@ -113,25 +100,12 @@
 
 
         function authenticateUser(email, password, users) {
+            
             return users.find(u => u.email === email && u.password === password);
         }
 
-        function handleRememberMe(email, rememberMe) {
-            
-            if (rememberMe) {
-                
-                localStorage.setItem('email', email);
-                localStorage.setItem('rememberMe', 'true');
-            } 
-            
-            else {
-                
-                localStorage.removeItem('email');
-                localStorage.removeItem('rememberMe');
-            }
-        }
-
         function displayLoginMessage(message, color, loginMessage) {
+           
             loginMessage.textContent = message;
             loginMessage.style.color = color;
         }
