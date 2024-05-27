@@ -1,0 +1,36 @@
+.grid {
+
+    display: grid;
+    grid-template-columns: repeat(5, 80px);
+    grid-template-rows: repeat(5, 80px);
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.grid div {
+    
+    width: 50px;
+    height: 50px;
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.grid .taken {
+    
+    background-color: red;
+}
+
+.grid .selected {
+
+    background-color: green;
+}
+
+.slotButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}

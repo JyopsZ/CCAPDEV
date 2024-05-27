@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Slot Availability</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+    
 </head>
 <body>
     <!-- Header section containing the title and navigation menu -->
@@ -22,7 +23,7 @@
     <main>
         <section class="availability-form">
             <h2>Check Availability</h2>
-            <form action="/check-availability" method="POST">
+            <form id="check-availability">
                 <!-- Laboratory selection dropdown -->
                 <label for="lab">Select Laboratory:</label>
                 <select id="lab" name="lab" required>
@@ -45,5 +46,36 @@
     <footer>
         <p>&copy; 2024 Laboratory Reservation System. All rights reserved.</p>
     </footer>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const checkAvail = document.getElementById('check-availability');
+
+            checkAvail.addEventListener('submit', function (event) {
+
+                event.preventDefault();
+
+                const lab = document.getElementById('lab').value;
+                const date = document.getElementById('date').value;
+
+                if (lab === 'chemistry' && date === '2024-05-27') {
+                    
+                    window.location.href = 'chemistry.html';
+                } 
+                        
+                else if (lab === 'physics' && date === '2024-05-27') {
+                    
+                    window.location.href = 'physics.html';
+                }
+
+                else {
+
+                    window.location.href = 'biology.html';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
