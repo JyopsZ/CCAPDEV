@@ -7,23 +7,43 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-      <!-- Header section containing the title and navigation menu -->
-      <header>
-        <h1>LView Reservation</h1>
+    <!-- Header section containing the title and navigation menu -->
+    <header>
+        <h1>View Reservation</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Login Page</a></li>
                 <li><a href="index2.html">Home</a></li>
+                <li><a href="reservation.html">Reservation</a></li>
+                <li><a href="View Reservation.html">View Reservation</a></li>
+                <li><a href="edit-reservation.html">Edit Reservation</a></li>
             </ul>
         </nav>
     </header>
 
-    <p>Add Necessary shit here</p>
-    
+    <!-- Main content section for viewing reservations -->
+    <main>
+        <section class="view-reservation">
+            <h2>Your Reservations</h2>
+            <form action="/view-reservation" method="POST">
+                <!-- User ID input to fetch reservations -->
+                <label for="user-id">User ID:</label>
+                <input type="text" id="user-id" name="user-id" required>
+                
+                <!-- Submit button to view reservations -->
+                <button type="submit">View Reservations</button>
+            </form>
+
+            <!-- Placeholder for displaying the reservation details -->
+            <div id="reservation-details">
+                <!-- Reservation details will be dynamically loaded here -->
+            </div>
+        </section>
+    </main>
+
     <!-- Footer section with copyright information -->
     <footer>
         <p>&copy; 2024 Laboratory Reservation System. All rights reserved.</p>
     </footer>
 </body>
 </html>
-</body>

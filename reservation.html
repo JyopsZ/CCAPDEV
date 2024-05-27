@@ -14,10 +14,37 @@
             <ul>
                 <li><a href="index.html">Login Page</a></li>
                 <li><a href="index2.html">Home</a></li>
+                <li><a href="reservation.html">Reservation</a></li>
+                <li><a href="View Reservation.html">View Reservation</a></li>
+                <li><a href="edit-reservation.html">Edit Reservation</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Main content section with a form to check slot availability -->
+    <main>
+        <section class="availability-form">
+            <h2>Check Availability</h2>
+            <form action="/check-availability" method="POST">
+                <!-- Laboratory selection dropdown -->
+                <label for="lab">Select Laboratory:</label>
+                <select id="lab" name="lab" required>
+                    <option value="chemistry">Chemistry Lab</option>
+                    <option value="physics">Physics Lab</option>
+                    <option value="biology">Biology Lab</option>
+                </select>
+                
+                <!-- Date input for selecting the date -->
+                <label for="date">Select Date:</label>
+                <input type="date" id="date" name="date" required>
+
+                <!-- Submit button to check availability -->
+                <button type="submit">Check Availability</button>
+
+                <button type="submit">Reserve Slot</button>
+            </form>
+        </section>
+    </main>
     <p>Add Necessary shit here</p>
     
     <!-- Footer section with copyright information -->
