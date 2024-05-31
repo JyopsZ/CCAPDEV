@@ -24,12 +24,20 @@
     <!-- Main content section for viewing reservations -->
     <main>
         <section class="view-reservation">
-            <h2>Your Reservations</h2>
+            <h2>View Reservations</h2>
             <form action="/view-reservation" method="POST">
                 <!-- User ID input to fetch reservations -->
-                <label for="user-id">User ID:</label>
-                <input type="text" id="user-id" name="user-id" required>
+                <label for="lab">Select Laboratory:</label>
+                <select id="lab" name="lab" required>
+                    <option value="Lab 1">Computer Lab 1</option>
+                    <option value="Lab 2">Computer Lab 2</option>
+                    <option value="Lab 3">Computer Lab 3</option>
+                </select>
                 
+                <!-- Date input for selecting the date -->
+                <label for="date">Select Date:</label>
+                <input type="date" id="date" name="date" required>
+
                 <!-- Submit button to view reservations -->
                 <button type="submit">View Reservations</button>
             </form>
