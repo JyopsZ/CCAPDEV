@@ -106,4 +106,10 @@ footer {
     margin: 0;
 }
 
-
+main{
+    background-image: url(background.avif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
