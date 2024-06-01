@@ -74,6 +74,16 @@ form button {
     cursor: pointer;
 }
 
+.edit-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* Hover effect for form buttons */
 form button:hover {
     background-color: #45a049;
@@ -93,4 +103,28 @@ footer {
 .main-container {
     height: calc(100vh - 150px); /* Adjust the height as needed */
     overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.section-container {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.round-image {
+    width: 150px; /* Adjust the width as needed */
+    height: 150px; /* Adjust the height as needed */
+    border-radius: 50%;
+    object-fit: cover; /* Ensures the image covers the entire element without stretching */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+.section {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
 }

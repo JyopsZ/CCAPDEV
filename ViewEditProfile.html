@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-      <!-- Header section containing the title and navigation menu -->
-      <header>
+    <!-- Header section containing the title and navigation menu -->
+    <header>
         <h1>View or Edit Profile</h1>
         <nav>
             <ul>
@@ -17,10 +17,44 @@
 
             </ul>
         </nav>
-    </header>
-    
-    <p>Add Necessary shit here</p>
 
+    </header>
+    <main>
+        <div class="section-container">
+            <section class="section">
+                <h2 class="edit-profile">Edit Your Profile</h2>
+                <form id="editForm">
+                    <div class="image-container">
+                        <!-- Email input field -->
+                        <img src="images/default.jpg" alt="Round Image" class="round-image">
+                        <button type="button" class="edit-button">Change Photo</button>
+                    </div>
+                    
+                    <label for="email">DLSU Email:</label>
+                    <input type="text" id="email" name="email" readonly>
+
+                    <!-- FirstName input field -->
+                    <label for="FirstName">First Name:</label>
+                    <input type="text" id="FirstName" name="FirstName">
+
+                    <!-- LastName input field -->
+                    <label for="LastName">Last Name:</label>
+                    <input type="text" id="LastName" name="LastName">
+
+                    <!-- Password input field -->
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password">
+
+                    <!-- Submit button to log in -->
+                    <button type="button" class="edit-button">Save</button>
+                </form>
+            </section>
+            <section class="section">
+                
+            </section>
+        </div>
+        
+    </main>
     <!-- Footer section with copyright information -->
     <footer>
         <p>&copy; 2024 Laboratory Reservation System. All rights reserved.</p>
