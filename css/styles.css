@@ -105,12 +105,6 @@ footer {
     overflow-y: auto; /* Enable vertical scrolling */
 }
 
-.section-container {
-    display: flex;
-    width: 80%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
 
 .round-image {
     width: 150px; /* Adjust the width as needed */
@@ -123,8 +117,32 @@ footer {
     padding: 20px;
 }
 
-.section {
-    flex: 1;
-    padding: 20px;
-    box-sizing: border-box;
+.bold {
+    font-weight: bold;
+}
+
+.section-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Space between sections */
+    overflow: auto; /* Make content scrollable */
+}
+
+.edit-footer {
+    position: relative;
+}
+.edit-header {
+    position: relative;
+}
+
+.view-section2 {
+    width: 600px;
+    position: relative; /* Set main section as the positioning context */
+    display: grid; /* Use CSS Grid layout */
+}
+
+.view-sectionsub {
+    width: 560px;
+    margin-bottom: 20px;
 }

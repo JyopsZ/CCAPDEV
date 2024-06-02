@@ -89,12 +89,12 @@
                     
                     window.location.href = 'index2.html';
                 }
-                localStorage.setItem('emmail', users.email);
-                localStorage.setItem('role', users.role);
-                localStorage.setItem('firstName', users.firstName);
-                localStorage.setItem('lasttName', users.lastName);
-                localStorage.setItem('password', users.password);
-                localStorage.setItem('picture', users.picLink);
+                localStorage.setItem('email', user.email);
+                localStorage.setItem('role', user.role);
+                localStorage.setItem('firstName', user.firstName);
+                localStorage.setItem('lastName', user.lastName);
+                localStorage.setItem('password', user.password);
+                localStorage.setItem('picture', user.picLink);
             } 
             
             else {
@@ -107,6 +107,7 @@
         function authenticateUser(email, password, users) {
             
             return users.find(u => u.email === email && u.password === password);
+            
         }
 
         function displayLoginMessage(message, color, loginMessage) {

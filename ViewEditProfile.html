@@ -8,20 +8,18 @@
 </head>
 <body>
     <!-- Header section containing the title and navigation menu -->
-    <header>
+    <header class="edit-header">
         <h1>View or Edit Profile</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Login Page</a></li>
                 <li><a href="index2.html">Home</a></li>
-
             </ul>
         </nav>
 
     </header>
     <main>
         <div class="section-container">
-            <section class="section">
+            <section class="edit-section">
                 <h2 class="edit-profile">Edit Your Profile</h2>
                 <form id="editForm">
                     <div class="image-container">
@@ -31,7 +29,7 @@
                     </div>
                     
                     <label for="email">DLSU Email:</label>
-                    <input type="text" id="email" name="email" readonly>
+                    <input type="text" id="email" name="email" value=" " readonly>
 
                     <!-- FirstName input field -->
                     <label for="FirstName">First Name:</label>
@@ -43,19 +41,51 @@
 
                     <!-- Password input field -->
                     <label for="password">Password:</label>
-                    <input type="password" id="password" name="password">
+                    <input type="text" id="password" name="password">
 
                     <!-- Submit button to log in -->
-                    <button type="button" class="edit-button">Save</button>
+                    <button type="button" class="edit-button" id="saveButton">Save</button>
                 </form>
             </section>
         </div>
-        
     </main>
     <!-- Footer section with copyright information -->
-    <footer>
+    <footer class="edit-footer">
         <p>&copy; 2024 Laboratory Reservation System. All rights reserved.</p>
     </footer>
+    <script>
+        // Retrieve data from local storage and populate input fields
+        document.addEventListener('DOMContentLoaded', function() {
+            const email = localStorage.getItem('email');
+            const firstName = localStorage.getItem('firstName');
+            const lastName = localStorage.getItem('lastName');
+            const password = localStorage.getItem('password');
+
+            if (email) document.getElementById('email').value = email;
+            if (firstName) document.getElementById('FirstName').value = firstName;
+            if (lastName) document.getElementById('LastName').value = lastName;
+            if (password) document.getElementById('password').value = password;
+
+            console.log(localStorage.getItem('email'));
+            console.log(localStorage.getItem('firstName'));
+            console.log(localStorage.getItem('lastName'));
+            console.log(localStorage.getItem('password'));
+        });
+
+        // Save data to local storage when the save button is clicked
+        document.getElementById('saveButton').addEventListener('click', function() {
+            const email = document.getElementById('email').value;
+            const firstName = document.getElementById('FirstName').value;
+            const lastName = document.getElementById('LastName').value;
+            const password = document.getElementById('password').value;
+
+            localStorage.setItem('email', email);
+            localStorage.setItem('firstName', firstName);
+            localStorage.setItem('lastName', lastName);
+            localStorage.setItem('password', password);
+            
+            alert('Profile saved successfully!');
+        });
+    </script>
 </body>
 </html>
-</body>
