@@ -59,6 +59,10 @@
                 const lab = document.getElementById('lab').value;
                 const date = document.getElementById('date').value;
 
+                const url = `reserveslot.html?lab=${encodeURIComponent(lab)}`;
+                window.location.href = url;
+
+                /*
                 if (lab === 'lab1' && date === '2024-05-27') {
                     
                     window.location.href = 'lab1.html';
@@ -72,7 +76,7 @@
                 else {
 
                     window.location.href = 'lab3.html';
-                }
+                }*/
             });
         });
     </script>
