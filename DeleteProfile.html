@@ -17,11 +17,56 @@
             </ul>
         </nav>
     </header>
+    <main>
+        <section>
+            <form>
+                <h3>Do you want to Delete Your Profile?</h3>
+                <button type="button" id="openPopupBtn">Delete Profile</button>
+                <div id="popup" class="popup">
+                    <div class="popup-content">
+                        <span class="close">&times;</span>
+                        <p>Are you sure?</p>
+                        <img src="images/sadcat.png">
+                        <button type="button" id="redirectBtn">Delete Profile</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
     
     <!-- Footer section with copyright information -->
     <footer>
         <p>&copy; 2024 Laboratory Reservation System. All rights reserved.</p>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Get the modal
+            var popup = document.getElementById("popup");
+
+            // Get the button that opens the modal
+            var btn = document.getElementById("openPopupBtn");
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // Get the redirect button
+            var redirectBtn = document.getElementById("redirectBtn");
+
+            // When the user clicks the button, open the modal 
+            btn.onclick = function() {
+                popup.style.display = "block";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                popup.style.display = "none";
+            }
+
+            // When the user clicks the redirect button, redirect to index.html
+            redirectBtn.onclick = function() {
+                window.location.href = "index.html"; // Redirect to index.html
+            }
+        });
+    </script>
 </body>
 </html>
-</body>
