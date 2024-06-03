@@ -1,68 +1,67 @@
 <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Reservation</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservation</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <script>
+        function redirectToPage(event) {
+            event.preventDefault(); // Prevent the default form submission
+            // Submit the form
+            document.getElementById('availabilityForm').submit();
+            // Redirect to another page after form submission
+            window.location.href = "reserveslot.html"; // Replace with your target URL
+        }    
+    </script>
+    <body>
+        <!-- Header section containing the title and navigation menu -->
+        <header>
+            <img src="logo.png" id="logo">
+            <h1>Reservation </h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Login Page</a></li>
+                    <li><a href="index2.html">Home</a></li>
+                    <li><a href="reservation.html">Reservation</a></li>
+                    <li><a href="View Reservation.html">View Reservation</a></li>
+                    <li><a href="edit-reservation.html">Edit Reservation</a></li>
+                </ul>
+            </nav>
+        </header>
 
-<script>
-    function redirectToPage(event) {
-        event.preventDefault(); // Prevent the default form submission
-        // Submit the form
-        document.getElementById('availabilityForm').submit();
-        // Redirect to another page after form submission
-        window.location.href = "reserveslot.html"; // Replace with your target URL
-    }    
-</script>
-<body>
-      <!-- Header section containing the title and navigation menu -->
-      <header>
-        <img src="logo.png" id="logo">
-        <h1>Reservation </h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Login Page</a></li>
-                <li><a href="index2.html">Home</a></li>
-                <li><a href="reservation.html">Reservation</a></li>
-                <li><a href="View Reservation.html">View Reservation</a></li>
-                <li><a href="edit-reservation.html">Edit Reservation</a></li>
-            </ul>
-        </nav>
-    </header>
+        <!-- Main content section with a form to check slot availability -->
+        <main>
+            <section class="availability-form">
+                <h2>Check Availability</h2>
+                <form action="/check-availability" method="POST">
+                    <!-- Laboratory selection dropdown -->
+                    <label for="lab">Select Laboratory:</label>
+                    <select id="lab" name="lab" required>
+                        <option value="Lab 1">Computer Lab 1</option>
+                        <option value="Lab 2">Computer Lab 2</option>
+                        <option value="Lab 3">Computer Lab 3</option>
+                    </select>
+                    
+                    <!-- Date input for selecting the date -->
+                    <label for="date">Select Date:</label>
+                    <input type="date" id="date" name="date" required>
 
-    <!-- Main content section with a form to check slot availability -->
-    <main>
-        <section class="availability-form">
-            <h2>Check Availability</h2>
-            <form action="/check-availability" method="POST">
-                <!-- Laboratory selection dropdown -->
-                <label for="lab">Select Laboratory:</label>
-                <select id="lab" name="lab" required>
-                    <option value="Lab 1">Computer Lab 1</option>
-                    <option value="Lab 2">Computer Lab 2</option>
-                    <option value="Lab 3">Computer Lab 3</option>
-                </select>
-                
-                <!-- Date input for selecting the date -->
-                <label for="date">Select Date:</label>
-                <input type="date" id="date" name="date" required>
-
-                <form id="availabilityForm" action="/check-availability" method="post" onsubmit="redirectToPage(event)">
-                    <!-- Your form fields here -->
-                    <button type="submit">Check Availability</button>
+                    <form id="availabilityForm" action="/check-availability" method="post" onsubmit="redirectToPage(event)">
+                        <!-- Your form fields here -->
+                        <button type="submit">Check Availability</button>
+                    </form>
+                    
                 </form>
-                
-            </form>
-        </section>
-    </main>
-    <p>Add Necessary shit here</p>
-    
-    <!-- Footer section with copyright information -->
-    <footer>
-        <p>&copy; 2024 Laboratory Reservation System. All rights reserved.</p>
-    </footer>
-</body>
+            </section>
+        </main>
+        <p>Add Necessary shit here</p>
+        
+        <!-- Footer section with copyright information -->
+        <footer>
+            <p>&copy; 2024 Laboratory Reservation System. All rights reserved.</p>
+        </footer>
+    </body>
 </html>
-</body>
