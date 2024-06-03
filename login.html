@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <!-- Header section containing the title and navigation menu -->
@@ -13,7 +13,7 @@
         <h1>Login</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html">Back</a></li>
                 <li><a href="register.html">Register</a></li>
                 <li><a href="login.html">Login</a></li>
             </ul>
@@ -24,7 +24,7 @@
     <main>
         <section class="login-form">
             <h2>Login to Your Account</h2>
-            <form action="/login" method="POST">
+            <form id="loginForm">
                 <!-- Email input field -->
                 <label for="email">DLSU Email:</label>
                 <input type="email" id="email" name="email" required>
@@ -39,9 +39,9 @@
 
                 <!-- Submit button to log in -->
                 <button type="submit">Login</button>
-
-                <!-- Add a href to redirect to actual page (reservation/edit reservation etc) after clicking submit-->
             </form>
+
+            <p id="loginMessage"></p>
         </section>
     </main>
     
@@ -49,5 +49,74 @@
     <footer>
         <p>&copy; 2024 Laboratory Reservation System. All rights reserved.</p>
     </footer>
+
+    <script>
+            
+            document.addEventListener('DOMContentLoaded', function () {
+            
+            const loginForm = document.getElementById('loginForm');
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            const loginMessage = document.getElementById('loginMessage');
+
+            // Hardcoded users
+            const users = [
+                
+                { email: 'timmy_yap@dlsu.edu.ph', password: 'student123', role: 'student', firstName: 'Timmy', lastName: 'Yap', picLink: 'images/default.jpg'},
+                { email: 'labtech1@dlsu.edu.ph', password: 'lab123', role: 'labtech', firstName: 'Mykel', lastName: 'Tiu', picLink: 'images/default.jpg'}
+            ];
+
+            loginForm.addEventListener('submit', function (event) {
+                
+                event.preventDefault();
+                handleLogin(email.value, password.value, users, loginMessage);
+            });
+        });
+
+        function handleLogin(email, password, users, loginMessage) {
+            
+            const user = authenticateUser(email, password, users);
+
+            if (user) {
+                
+                //displayLoginMessage(`Welcome, ${user.firstName}!`, 'green', loginMessage);
+
+                if (user.role ==='student') {
+                    
+                    window.location.href = 'studentPage.html';
+                } 
+                
+                else {
+                    
+                    window.location.href = 'labtechPage.html';
+                }
+                
+                localStorage.setItem('email', user.email);
+                localStorage.setItem('role', user.role);
+                localStorage.setItem('firstName', user.firstName);
+                localStorage.setItem('lastName', user.lastName);
+                localStorage.setItem('password', user.password);
+                localStorage.setItem('picture', user.picLink);
+            } 
+            
+            else {
+                
+                displayLoginMessage('Invalid email or password.', 'red', loginMessage);
+            }
+        }
+
+
+        function authenticateUser(email, password, users) {
+            
+            return users.find(u => u.email === email && u.password === password);
+            
+        }
+
+        function displayLoginMessage(message, color, loginMessage) {
+           
+            loginMessage.textContent = message;
+            loginMessage.style.color = color;
+        }
+    </script>
 </body>
 </html>

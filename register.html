@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <!-- Header section containing the title and navigation menu -->
@@ -13,18 +13,24 @@
         <h1>Register</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="register.html">Register</a></li>
+                <li><a href="index.html">Back</a></li>
                 <li><a href="login.html">Login</a></li>
             </ul>
         </nav>
     </header>
-    
+
     <!-- Main content section with a registration form -->
     <main>
         <section class="register-form">
             <h2>Create an Account</h2>
-            <form action="/register" method="POST">
+            <form id="registerForm">
+
+                <label for="firstName">First Name:</label>
+                <input type="firstName" id="firstName" name="firstName" required>
+
+                <label for="lastName">Last Name:</label>
+                <input type="lastName" id="lastName" name="lastName" required>
+
                 <!-- Email input field -->
                 <label for="email">DLSU Email:</label>
                 <input type="email" id="email" name="email" required>
@@ -52,5 +58,34 @@
     <footer>
         <p>&copy; 2024 Laboratory Reservation System. All rights reserved.</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const registerForm = document.getElementById('registerForm');
+
+            registerForm.addEventListener('submit', function (event) {
+
+                event.preventDefault();
+
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const role = document.getElementById('role').value;
+
+                if (role ==='student') {
+                    
+                    window.location.href = 'studentPage.html';
+                } 
+                        
+                else {
+                    
+                    window.location.href = 'index2.html';
+                }
+            });
+        });
+
+    </script>
 </body>
 </html>
