@@ -16,6 +16,10 @@ header {
     text-align: center;
 }
 
+#logo{
+    width: 70px;
+    height: 70px;
+}
 /* Styling for navigation menu */
 nav ul {
     list-style-type: none;
@@ -98,6 +102,46 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+.time-slot {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.time-slot h2 {
+    margin: 0;
+}
+
+main{
+    background-image: url(background.avif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.time-slot {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.time-slot h2 {
+    margin: 0;
+}
+
+main{
+    background-image: url(background.avif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .main-container {

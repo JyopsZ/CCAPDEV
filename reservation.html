@@ -6,10 +6,21 @@
     <title>Reservation</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
+<script>
+    function redirectToPage(event) {
+        event.preventDefault(); // Prevent the default form submission
+        // Submit the form
+        document.getElementById('availabilityForm').submit();
+        // Redirect to another page after form submission
+        window.location.href = "reserveslot.html"; // Replace with your target URL
+    }    
+</script>
 <body>
       <!-- Header section containing the title and navigation menu -->
       <header>
-        <h1>Reservation</h1>
+        <img src="logo.png" id="logo">
+        <h1>Reservation </h1>
         <nav>
             <ul>
                 <li><a href="index.html">Login Page</a></li>
@@ -29,19 +40,20 @@
                 <!-- Laboratory selection dropdown -->
                 <label for="lab">Select Laboratory:</label>
                 <select id="lab" name="lab" required>
-                    <option value="chemistry">Chemistry Lab</option>
-                    <option value="physics">Physics Lab</option>
-                    <option value="biology">Biology Lab</option>
+                    <option value="Lab 1">Computer Lab 1</option>
+                    <option value="Lab 2">Computer Lab 2</option>
+                    <option value="Lab 3">Computer Lab 3</option>
                 </select>
                 
                 <!-- Date input for selecting the date -->
                 <label for="date">Select Date:</label>
                 <input type="date" id="date" name="date" required>
 
-                <!-- Submit button to check availability -->
-                <button type="submit">Check Availability</button>
-
-                <button type="submit">Reserve Slot</button>
+                <form id="availabilityForm" action="/check-availability" method="post" onsubmit="redirectToPage(event)">
+                    <!-- Your form fields here -->
+                    <button type="submit">Check Availability</button>
+                </form>
+                
             </form>
         </section>
     </main>
