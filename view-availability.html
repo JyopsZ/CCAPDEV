@@ -26,9 +26,9 @@
                 <!-- Laboratory selection dropdown -->
                 <label for="lab">Select Laboratory:</label>
                 <select id="lab" name="lab" required>
-                    <option value="chemistry">Chemistry Lab</option>
-                    <option value="physics">Physics Lab</option>
-                    <option value="biology">Biology Lab</option>
+                    <option value="lab1">Lab Alpha</option>
+                    <option value="lab2">Lab Beta</option>
+                    <option value="lab3">Lab Charlie</option>
                 </select>
                 
                 <!-- Date input for selecting the date -->
@@ -59,19 +59,19 @@
                 const lab = document.getElementById('lab').value;
                 const date = document.getElementById('date').value;
 
-                if (lab === 'chemistry' && date === '2024-05-27') {
+                if (lab === 'lab1' && date === '2024-05-27') {
                     
-                    window.location.href = 'chemistry.html';
+                    window.location.href = 'lab1.html';
                 } 
                         
-                else if (lab === 'physics' && date === '2024-05-27') {
+                else if (lab === 'lab2' && date === '2024-05-27') {
                     
-                    window.location.href = 'physics.html';
+                    window.location.href = 'lab2.html';
                 }
 
                 else {
 
-                    window.location.href = 'biology.html';
+                    window.location.href = 'lab3.html';
                 }
             });
         });

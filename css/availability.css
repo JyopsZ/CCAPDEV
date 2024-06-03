@@ -7,7 +7,25 @@
     margin-top: 20px;
 }
 
-.grid div {
+.grid-two {
+
+    display: grid;
+    grid-template-columns: repeat(6, 80px);
+    grid-template-rows: repeat(4, 80px);
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.grid-three {
+
+    display: grid;
+    grid-template-columns: repeat(8, 80px);
+    grid-template-rows: repeat(3, 80px);
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.grid div, .grid-two div, .grid-three div{
     
     width: 50px;
     height: 50px;
@@ -18,12 +36,12 @@
     cursor: pointer;
 }
 
-.grid .taken {
+.grid .taken, .grid-two .taken, .grid-three .taken{
     
     background-color: red;
 }
 
-.grid .selected {
+.grid .selected, .grid-two .selected, .grid-three .selected{
 
     background-color: green;
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/buttons.css">
 </head>
 <body>
     <!-- Header section containing the title and navigation menu -->
@@ -20,41 +21,17 @@
 
     <!-- Main content section with a registration form -->
     <main>
-        
+        <section class="sub-menu">
+            <h1>What would you like to do?</h1>
+            <a href="reservation.html" class="button-link"><button class="nice-button">Make a Reservation</button></a>
+            <a href="View Reservation.html" class="button-link"><button class="nice-button">View Existing Reservation</button></a>
+            <a href="edit-reservation.html" class="button-link"><button class="nice-button">Edit Reservation</button></a>
+        </section>
     </main>
     
     <!-- Footer section with copyright information -->
     <footer>
         <p>&copy; 2024 Laboratory Reservation System. All rights reserved.</p>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            
-            const registerForm = document.getElementById('registerForm');
-
-            registerForm.addEventListener('submit', function (event) {
-
-                event.preventDefault();
-
-                const firstName = document.getElementById('firstName').value;
-                const lastName = document.getElementById('lastName').value;
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                const role = document.getElementById('role').value;
-
-                if (role ==='student') {
-                    
-                    window.location.href = 'studentPage.html';
-                } 
-                        
-                else {
-                    
-                    window.location.href = 'index2.html';
-                }
-            });
-        });
-
-    </script>
 </body>
 </html>
