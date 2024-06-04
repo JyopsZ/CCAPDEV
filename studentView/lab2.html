@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Seat Reservation</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/availability.css">
+</head>
+<body>
+    <header>
+        <img src="../images/logo.png" id="logo">
+        <h1>Lab Seat Reservation</h1>
+        <style>
+            body {
+
+                background-image: url("images/seat-background.jpg");
+            }
+
+            main {
+
+                display: flex;
+                flex-direction: column;
+            }
+
+        </style>
+    </header>
+    <main>
+        <div id="seat-container" class="grid-two"></div>
+        <button id="confirm-button" class="slotButton">Confirm</button>
+    </main>
+    <footer>
+        <p>&copy; 2024 Laboratory Reservation System. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.querySelector("#seat-container");
+            const takenSeats = [
+                { row: 1, col: 1 },
+                { row: 2, col: 4 },
+                { row: 2, col: 3 },
+                { row: 4, col: 5 },
+                { row: 5, col: 5 }
+            ];
+
+            for (let i = 1; i <= 4; i++) {
+                for (let j = 1; j <= 6; j++) {
+                    
+                    
+                    if (i === 4 && (j === 3 || j === 4)) { // Disregard 4th row, columns 3 and 4 in creating seat divs
+                        
+                        const emptySpace = document.createElement("div");
+                        emptySpace.style.visibility = 'hidden';
+                        
+                        container.appendChild(emptySpace);
+                        continue;
+                    }
+
+                    const seat = document.createElement("div");
+                    
+                    if (takenSeats.some(seat => seat.row === i && seat.col === j)) {
+                        seat.classList.add("taken");
+                    }
+
+                    seat.addEventListener("click", function() {
+                        if (!seat.classList.contains("taken")) {
+                            
+                            seat.classList.toggle("selected");
+                        }
+                    });
+
+                    container.appendChild(seat);
+                }
+            }
+
+            const confirmButton = document.querySelector("#confirm-button");
+            confirmButton.addEventListener("click", function() {
+                const confirmReserve = confirm("Are you sure you want to reserve the selected seats?");
+                if (confirmReserve) {
+                    window.location.href = "view-availability.html";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

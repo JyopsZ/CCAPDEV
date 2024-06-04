@@ -9,7 +9,7 @@
 <body>
     <!-- Header section containing the title and navigation menu -->
     <header>
-        <img src="logo.png" id="logo">
+        <img src="images/logo.png" id="logo">
         <h1>Login</h1>
         <nav>
             <ul>
@@ -83,12 +83,12 @@
 
                 if (user.role ==='student') {
                     
-                    window.location.href = 'studentPage.html';
+                    window.location.href = 'studentView/studentPage.html';
                 } 
                 
                 else {
                     
-                    window.location.href = 'labtechPage.html';
+                    window.location.href = 'labtechView/labtechPage.html';
                 }
                 
                 localStorage.setItem('email', user.email);
