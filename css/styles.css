@@ -250,3 +250,15 @@ footer {
     text-decoration: none;
     cursor: pointer;
 }
+
+.viewReservations {
+    width: 600px;
+    position: relative; /* Set main section as the positioning context */
+    display: grid; /* Use CSS Grid layout */
+}
+
+.view-Reservationsub {
+    width: 560px;
+    margin-bottom: 20px;
+    border: 1px solid ;
+}
