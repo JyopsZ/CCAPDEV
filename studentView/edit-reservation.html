@@ -31,9 +31,9 @@
                 <!-- Laboratory selection dropdown -->
                 <label for="edit-lab">Select Laboratory:</label>
                 <select id="edit-lab" name="edit-lab" required>
-                    <option value="Lab 1">Lab Alpha</option>
-                    <option value="Lab 2">Lab Bravo</option>
-                    <option value="Lab 3">Lab Charlie</option>
+                    <option value="lab1">Lab Alpha</option>
+                    <option value="lab2">Lab Bravo</option>
+                    <option value="lab3">Lab Charlie</option>
                 </select>
 
                 <!-- Date input for selecting the new date -->
@@ -52,18 +52,21 @@
     </footer>
 
     <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
             
-        const editReserve = document.getElementById('edit-reserveForm');
+            const editReserve = document.getElementById('edit-reserveForm');
 
-        editReserve.addEventListener('submit', function (event) {
+            editReserve.addEventListener('submit', function (event) {
 
-            event.preventDefault();
+                event.preventDefault();
 
-            const lab = document.getElementById('edit-lab').value;
+                const lab = document.getElementById('edit-lab').value;
+                const date = document.getElementById('edit-date').value;
 
-            const url = `reserveslot.html?lab=${encodeURIComponent(lab)}`;
-            window.location.href = url;
-
+                const url = `Reserveslot.html?lab=${encodeURIComponent(lab)}`;
+                window.location.href = url;
+            });
         });
     </script>
 

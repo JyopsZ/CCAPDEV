@@ -19,3 +19,25 @@
 	position:relative;
 	top:1px;
 }
+
+.view-Reservationsub:hover, .view-Reservationsub.selected {
+
+	background-color: lightblue;
+	cursor: pointer;
+}
+
+.submit-button {
+	display: block;
+	margin: 20px auto;
+	padding: 10px 20px;
+	background-color: #4CAF50; /* Green */
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.submit-button:hover {
+	background-color: #45a049; /* Darker green */
+}
