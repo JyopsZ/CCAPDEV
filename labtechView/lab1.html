@@ -63,6 +63,11 @@
                         tooltip.textContent = takenSeat.name;
                         seat.classList.add("tooltip");
                         seat.appendChild(tooltip);
+
+                        if (takenSeat.name === "Liam") {
+                            
+                            tooltip.innerHTML = '<a href="LViewOtherProfile.html" class="link">Liam</a>';
+                        }
                     }
 
                     seat.addEventListener("click", function() {
