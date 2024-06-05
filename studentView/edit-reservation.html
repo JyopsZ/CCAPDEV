@@ -50,5 +50,22 @@
     <footer>
         <p>&copy; 2024 Laboratory Reservation System. All rights reserved.</p>
     </footer>
+
+    <script>
+            
+        const editReserve = document.getElementById('edit-reserveForm');
+
+        editReserve.addEventListener('submit', function (event) {
+
+            event.preventDefault();
+
+            const lab = document.getElementById('edit-lab').value;
+
+            const url = `reserveslot.html?lab=${encodeURIComponent(lab)}`;
+            window.location.href = url;
+
+        });
+    </script>
+
 </body>
 </html>

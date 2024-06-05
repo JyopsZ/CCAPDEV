@@ -21,9 +21,9 @@
     
     <!-- Main content section with a form to check slot availability -->
     <main>
-        <section class="availability-form">
-            <h2>Check Availability</h2>
-            <form id="check-availability">
+        <section class="reservation-form">
+            <h2>Reserve a Seat</h2>
+            <form id="reservation">
                 <!-- Laboratory selection dropdown -->
                 <label for="lab">Select Laboratory:</label>
                 <select id="lab" name="lab" required>
@@ -51,7 +51,7 @@
 
         document.addEventListener('DOMContentLoaded', function () {
             
-            const checkAvail = document.getElementById('check-availability');
+            const checkAvail = document.getElementById('reservation');
 
             checkAvail.addEventListener('submit', function (event) {
 
@@ -63,21 +63,6 @@
                 const url = `reserveslot.html?lab=${encodeURIComponent(lab)}`;
                 window.location.href = url;
 
-                /*
-                if (lab === 'lab1' && date === '2024-05-27') {
-                    
-                    window.location.href = 'lab1.html';
-                } 
-                        
-                else if (lab === 'lab2' && date === '2024-05-27') {
-                    
-                    window.location.href = 'lab2.html';
-                }
-
-                else {
-
-                    window.location.href = 'lab3.html';
-                }*/
             });
         });
     </script>
