@@ -20,7 +20,13 @@
 	top:1px;
 }
 
-.view-Reservationsub:hover, .view-Reservationsub.selected {
+.view-Reservationsub:hover{
+
+	background-color: lightgray;
+	cursor: pointer;
+}
+
+.view-Reservationsub.selected {
 
 	background-color: lightblue;
 	cursor: pointer;
