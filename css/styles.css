@@ -1,5 +1,5 @@
 /* styles.css */
-
+/* Reference for fade in: https://www.geeksforgeeks.org/how-to-create-fade-in-effect-on-page-load-using-css/ *
 /* Basic reset for body */
 body {
     font-family: Arial, sans-serif;
@@ -18,6 +18,20 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+
+
+    animation: fadeInAnimation ease 0.8s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 /* Styling for header section */
