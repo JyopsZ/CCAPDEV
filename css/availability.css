@@ -34,6 +34,11 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
+    box-shadow: 10px 10px 12px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 10px 10px 12px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 12px 0px rgba(0,0,0,0.75);
+
 }
 
 .grid .taken, .grid-two .taken, .grid-three .taken{
