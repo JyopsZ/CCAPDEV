@@ -47,6 +47,23 @@ app.get('/studentView/edit-reservation', function(req, res) {
 	res.sendFile(__dirname + "\\" + "/studentView/edit-reservation.html");
 });
 
+// Student reservation
+app.get('/studentView/reserveslot', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/studentView/reserveslot.html");
+});
+
+// Student reserveslot
+app.get('/studentView/lab1', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/studentView/lab1.html");
+});
+
+app.get('/studentView/lab2', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/studentView/lab2.html");
+});
+
+app.get('/studentView/lab3', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/studentView/lab3.html");
+});
 
 
 // Lab Technician Labs
