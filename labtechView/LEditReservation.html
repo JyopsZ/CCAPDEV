@@ -13,8 +13,8 @@
         <h1>Edit Reservation </h1>
         <nav>
             <ul>
-                <li><a href="LSubReservation.html">Back</a></li>
-                <li><a href="labtechPage.html">Home</a></li>
+                <li><a href="LSubReservation">Back</a></li>
+                <li><a href="labtechPage">Home</a></li>
             </ul>
         </nav>
     </header>
@@ -64,7 +64,7 @@
                 const lab = document.getElementById('edit-lab').value;
                 const date = document.getElementById('edit-date').value;
 
-                const url = `LReserveslot.html?lab=${encodeURIComponent(lab)}`;
+                const url = `LReserveslot?lab=${encodeURIComponent(lab)}`;
                 window.location.href = url;
             });
         });

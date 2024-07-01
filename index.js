@@ -89,14 +89,84 @@ app.get('/studentView/ViewOtherProfile', function(req, res) {
 });
 
 
-// Lab Technician Labs
+
+
+
+/**************************************** LAB TECHNICIAN ********************************************/
+
+// Lab Tech main page
 app.get('/labtechView/labtechPage', function(req, res) {
-	res.sendFile(__dirname + "\\" + "labtechPage.html");
+	res.sendFile(__dirname + "\\" + "/labtechView/labtechPage.html");
 });
 
-// Student Labs
-app.get('/studentView/studentPage', function(req, res) {
-	res.sendFile(__dirname + "\\" + "studentPage.html");
+app.get('/labtechView/LViewAvailability', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/labtechView/LViewAvailability.html");
+});
+
+app.get('/labtechView/LSubReservation', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/labtechView/LSubReservation.html");
+});
+
+app.get('/labtechView/LSubProfile', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/labtechView/LSubProfile.html");
+});
+
+
+// Lab Tech viewAvailability
+app.get('/labtechView/LReserveslot', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/labtechView/LReserveslot.html");
+});
+
+
+// Lab Tech LSubReservation
+app.get('/labtechView/LReservation', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/labtechView/LReservation.html");
+});
+
+app.get('/labtechView/LEditReservation', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/labtechView/LEditReservation.html");
+});
+
+app.get('/labtechView/LRemoveReservationlist', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/labtechView/LRemoveReservationlist.html");
+});
+
+
+// Lab Tech LReservation
+app.get('/labtechView/LRemoveReservationlist', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/labtechView/LRemoveReservationlist.html");
+});
+
+app.get('/labtechView/lab1', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/labtechView/lab1.html");
+});
+
+app.get('/labtechView/lab2', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/labtechView/lab2.html");
+});
+
+app.get('/labtechView/lab3', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/labtechView/lab3.html");
+});
+
+
+// Lab Tech LSubProfile
+app.get('/labtechView/searchEditProfile', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/labtechView/searchEditProfile.html");
+});
+
+app.get('/labtechView/LsearchOtherProfile', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/labtechView/LsearchOtherProfile.html");
+});
+
+
+// Lab Tech LViewEditProfile
+app.get('/labtechView/LViewEditProfile', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/labtechView/LViewEditProfile.html");
+});
+
+app.get('/labtechView/LViewOtherProfile', function(req, res) {
+	res.sendFile(__dirname + "\\" + "/labtechView/LViewOtherProfile.html");
 });
 
 /*
