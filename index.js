@@ -103,6 +103,7 @@ app.get('/labtechView/LViewAvailability', function(req, res) {
 	res.sendFile(__dirname + "\\" + "/labtechView/LViewAvailability.html");
 });
 
+
 app.get('/labtechView/LSubReservation', function(req, res) {
 	res.sendFile(__dirname + "\\" + "/labtechView/LSubReservation.html");
 });
@@ -186,4 +187,12 @@ app.post('/submit-student-data', function(req, res) {
 
 var server = app.listen(5000, function() {
 	console.log("listening to port 5000...");
+});
+
+
+// test
+app.get('/labtechView/LViewAvailability', (req, res) => {
+    res.render('home', {
+        footerWeb: "&copy; 2024 LabLink. All rights reserved."
+    });
 });
