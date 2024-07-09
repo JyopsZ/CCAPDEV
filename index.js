@@ -258,10 +258,10 @@ app.post("/login", express.urlencoded({ extended: true }), (req, res) => {
     }
 });
 
-/* --------------------- SEARCH USERS ------------------------ */
+/* --------------------- SEARCH USERS for students ------------------------ */
 app.post("/findUser", (req, res) => {
     const { userName } = req.body;
-    const foundUser = users.find(user => `${user.firstName} ${user.lastName}`.toLowerCase() === userName.toLowerCase());
+    const foundUser = users.find(user => `${user.firstName} ${user.lastName}`.toLowerCase() === userName.toLowerCase() || `${user.firstName}` .toLowerCase() === userName.toLowerCase());
     if (foundUser) {
         res.render('searchOtherProfile', { userData: foundUser });
     } else {
@@ -269,9 +269,10 @@ app.post("/findUser", (req, res) => {
     }
 });
 
+/* --------------------- SEARCH USERS for LabTechs ------------------------ */
 app.post("/findUser", (req, res) => {
     const { userName } = req.body;
-    const foundUser = users.find(user => `${user.firstName} ${user.lastName}`.toLowerCase() === userName.toLowerCase());
+    const foundUser = users.find(user => `${user.firstName} ${user.lastName}`.toLowerCase() === userName.toLowerCase() || `${user.firstName}` .toLowerCase() === userName.toLowerCase());
     if (foundUser) {
         res.render('LsearchOtherProfile', { userData: foundUser });
     } else {
@@ -320,6 +321,6 @@ app.post('/submit-student-data', function(req, res) {
 });
 */
 
-var server = app.listen(4000, function() {
-	console.log("listening to port 4000...");
+var server = app.listen(3000, function() {
+	console.log("listening to port 3000...");
 });
