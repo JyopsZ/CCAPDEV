@@ -154,6 +154,8 @@ const reserve4 = {
     reserveID: "904"
 };
 
+const reservations = [reserve1, reserve2, reserve3, reserve4];
+
 /* --------------------- End of Hard Coded Data ------------------------ */
 
 
@@ -277,6 +279,32 @@ app.post("/findUserLab", (req, res) => {
     } else {
         res.send("User not found. <a href='LsearchOtherProfile'>Try again.</a>");
     }
+});
+
+
+/* --------------------- EDIT PROFILE ------------------------ */
+app.get("/ViewEditProfile", (req, res) => {
+    
+    const currUser = req.session.user;
+    res.render('ViewEditProfile', { userData: currUser });
+});
+
+app.get("/LViewEditProfile", (req, res) => {
+    
+    const currUserLab = req.session.user;
+    res.render('LViewEditProfile', { userData: currUserLab });
+});
+
+app.post("/editInfo", (req, res) => {
+    
+    const currUser = req.session.user;
+    res.render('ViewEditProfile', { userData: currUser });
+});
+
+app.post("/editInfoLab", (req, res) => {
+    
+    const currUserLab = req.session.user;
+    res.render('LViewEditProfile', { userData: currUserLab });
 });
 
 

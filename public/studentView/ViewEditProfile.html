@@ -23,7 +23,7 @@
         <div class="section-container">
             <section class="edit-section">
                 <h2 class="edit-profile">Edit Your Profile</h2>
-                <form id="editForm">
+                <form id="editForm" form action="/editInfo" method="POST">
                     <div class="image-container">
                         <!-- Email input field -->
                         <img src="../images/default.jpg" alt="Round Image" class="round-image">
@@ -46,7 +46,7 @@
                     <input type="text" id="password" name="password">
 
                     <!-- Submit button to log in -->
-                    <button type="button" class="edit-button" id="saveButton">Save</button>
+                    <button type="submit" class="edit-button" id="saveButton">Save</button>
                 </form>
             </section>
         </div>
@@ -55,6 +55,8 @@
     <footer class="edit-footer">
         <p>&copy; 2024 LabLink. All rights reserved.</p>
     </footer>
+
+    <!--
     <script>
         // Retrieve data from local storage and populate input fields
         document.addEventListener('DOMContentLoaded', function() {
@@ -90,5 +92,6 @@
             window.location.href = "studentPage";
         });
     </script>
+    -->
 </body>
 </html>
