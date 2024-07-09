@@ -265,17 +265,17 @@ app.post("/findUser", (req, res) => {
     if (foundUser) {
         res.render('searchOtherProfile', { userData: foundUser });
     } else {
-        res.send("User not found. <a href='/studentView/searchOtherProfile'>Try again.</a>");
+        res.send("User not found. <a href='searchOtherProfile'>Try again.</a>");
     }
 });
 
-app.post("/findUser", (req, res) => {
+app.post("/findUserLab", (req, res) => {
     const { userName } = req.body;
     const foundUser = users.find(user => `${user.firstName} ${user.lastName}`.toLowerCase() === userName.toLowerCase());
     if (foundUser) {
         res.render('LsearchOtherProfile', { userData: foundUser });
     } else {
-        res.send("User not found. <a href='/labtechView/LsearchOtherProfile'>Try again.</a>");
+        res.send("User not found. <a href='LsearchOtherProfile'>Try again.</a>");
     }
 });
 
@@ -320,6 +320,6 @@ app.post('/submit-student-data', function(req, res) {
 });
 */
 
-var server = app.listen(4000, function() {
-	console.log("listening to port 4000...");
+var server = app.listen(3000, function() {
+	console.log("listening to port 3000...");
 });

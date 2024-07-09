@@ -8,7 +8,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "cookie-parser": "^1.4.6",
     "express": "^4.19.2",
@@ -17,5 +16,7 @@
     "hbs": "^4.2.0",
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.0"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }
