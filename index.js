@@ -13,7 +13,7 @@ const app = new express();
 /* Initialize database collections */
 const Reservation = require("./model/reservation")
 const Profile = require("./model/profile")
-
+const User = require("./model/user")
 
 /*  Importing of Routes From Controller Folder  */
 const landingRoutes = require('./controller/landing')
@@ -21,6 +21,7 @@ const studentRoutes = require('./controller/student')
 const labtechRoutes = require('./controller/labtech')
 
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 //app.use(express.static(__dirname)); // legacy code in case of emergency
 
 app.use(express.static(path.join(__dirname + "/public"))); 

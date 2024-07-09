@@ -23,33 +23,27 @@
     <main>
         <section class="register-form">
             <h2>Create an Account</h2>
-            <form id="registerForm">
-
+            <!-- Register.html -->
+            <form id="registerForm" action="/register" method="POST">
                 <label for="firstName">First Name:</label>
-                <input type="firstName" id="firstName" name="firstName" required>
+                <input type="text" id="firstName" name="firstName" required>
 
                 <label for="lastName">Last Name:</label>
-                <input type="lastName" id="lastName" name="lastName" required>
+                <input type="text" id="lastName" name="lastName" required>
 
-                <!-- Email input field -->
                 <label for="email">DLSU Email:</label>
                 <input type="email" id="email" name="email" required>
 
-                <!-- Password input field -->
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
 
-                <!-- Role selection dropdown -->
                 <label for="role">I am a:</label>
                 <select id="role" name="role" required>
                     <option value="student">Student</option>
                     <option value="technician">Lab Technician</option>
                 </select>
 
-                <!-- Submit button to register -->
                 <button type="submit">Register</button>
-
-                <!-- add a href that will redirect to the home page to login -->
             </form>
         </section>
     </main>
@@ -58,34 +52,5 @@
     <footer>
         <p>&copy; 2024 LabLink. All rights reserved.</p>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            
-            const registerForm = document.getElementById('registerForm');
-
-            registerForm.addEventListener('submit', function (event) {
-
-                event.preventDefault();
-
-                const firstName = document.getElementById('firstName').value;
-                const lastName = document.getElementById('lastName').value;
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                const role = document.getElementById('role').value;
-
-                if (role ==='student') {
-                    
-                    window.location.href = 'studentView/studentPage';
-                } 
-                        
-                else {
-                    
-                    window.location.href = 'labtechView/labtechPage';
-                }
-            });
-        });
-
-    </script>
 </body>
 </html>

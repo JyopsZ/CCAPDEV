@@ -54,40 +54,5 @@
     <footer class="edit-footer">
         <p>&copy; 2024 LabLink. All rights reserved.</p>
     </footer>
-    <script>
-        // Retrieve data from local storage and populate input fields
-        document.addEventListener('DOMContentLoaded', function() {
-            const email = localStorage.getItem('email');
-            const firstName = localStorage.getItem('firstName');
-            const lastName = localStorage.getItem('lastName');
-            const password = localStorage.getItem('password');
-
-            if (email) document.getElementById('email').value = email;
-            if (firstName) document.getElementById('FirstName').value = firstName;
-            if (lastName) document.getElementById('LastName').value = lastName;
-            if (password) document.getElementById('password').value = password;
-
-            console.log(localStorage.getItem('email'));
-            console.log(localStorage.getItem('firstName'));
-            console.log(localStorage.getItem('lastName'));
-            console.log(localStorage.getItem('password'));
-        });
-
-        // Save data to local storage when the save button is clicked
-        document.getElementById('saveButton').addEventListener('click', function() {
-            const email = document.getElementById('email').value;
-            const firstName = document.getElementById('FirstName').value;
-            const lastName = document.getElementById('LastName').value;
-            const password = document.getElementById('password').value;
-
-            localStorage.setItem('email', email);
-            localStorage.setItem('firstName', firstName);
-            localStorage.setItem('lastName', lastName);
-            localStorage.setItem('password', password);
-            
-            alert('Profile saved successfully!');
-            window.location.href = "labtechPage";
-        });
-    </script>
 </body>
 </html>
