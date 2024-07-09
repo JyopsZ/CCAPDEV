@@ -1,22 +1,41 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var path = require('path');
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost:27017/')
 
-var app = express();
+const express = require('express')
+const bodyParser = require('body-parser')
+const path = require('path')
+
+// File Uploading
+const fileUpload = require('express-fileupload')
+
+const app = new express();
+
+/* Initialize database collections */
+const Reservation = require("./model/reservation")
+const Profile = require("./model/profile")
+
+
+/*  Importing of Routes From Controller Folder  */
+const landingRoutes = require('./controller/landing')
+const studentRoutes = require('./controller/student')
+const labtechRoutes = require('./controller/labtech')
+
 app.use(bodyParser.urlencoded({extended: false}));
-//app.use(express.static(__dirname));
+//app.use(express.static(__dirname)); // legacy code in case of emergency
 
 app.use(express.static(path.join(__dirname + "/public"))); 
 
-/* ------------------------- Importing of Routes From Controller Folder --------------------------------- */
-var landingRoutes = require('./controller/landing');
-var studentRoutes = require('./controller/student');
-var labtechRoutes = require('./controller/labtech');
-
+/*  Importing of Routes From Controller Folder  */
 app.use('/', landingRoutes);
 app.use('/', studentRoutes);
 app.use('/', labtechRoutes);
 
+app.use(express.json());
+app.use(fileUpload());
+
+/* Handlebars */
+var hbs = require('hbs')
+app.set('view engine','hbs');
 
 
 /*
