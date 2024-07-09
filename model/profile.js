@@ -1,11 +1,13 @@
 const mongoose = require('mongoose')
 
 const profileSchema = new mongoose.Schema({
-    title: String,
-    description: String,
+    firstName: String,
+    lastName: String,
     email: String,
+    password: String,
     role: String,
-    image: String
+    image: String,
+    profileID: String
 })
 
 const Profile = mongoose.model('Profile', profileSchema)

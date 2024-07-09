@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Labtech Page</title>
+    <title>Homepage</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
@@ -13,19 +13,17 @@
         <h1>Homepage</h1>
         <nav>
             <ul>
-                <li><a href="LViewAvailability">View Slot Availability</a></li>
-                <li><a href="LSubReservation">Reservations</a></li>
-                <li><a href="LSubProfile">Profiles</a></li>
-                <li><a href="../logout">Logout</a></li>
-
-
+                <li><a href="/studentView/view-availability">View Slot Availability</a></li>
+                <li><a href="/studentView/subReservation">Reservations</a></li>
+                <li><a href="/studentView/subProfile">Profile</a></li>
+                <li><a href="../">Logout</a></li>
             </ul>
         </nav>
     </header>
     
     <main>
         <section class="intro">
-            <h2>Welcome to LabLink</h2>
+            <h2>Welcome to LabLink, {{userData.firstName}}!</h2>
             <p>Reserve a seat in one of our computer labs easily and quickly.</p>
         </section>
     </main>

@@ -1,11 +1,12 @@
 const mongoose = require('mongoose')
 
 const reserveSchema = new mongoose.Schema({
-    firstName: String,
-    lastName: String,
+    labName: String,
+    seatPosition: [Number],
+    date: Date,
     time: String,
     reserver: String,
-    image: String
+    reserveID: String
 })
 
 const Reservation = mongoose.model('Reservation', reserveSchema)
