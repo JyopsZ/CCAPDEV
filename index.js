@@ -114,8 +114,18 @@ const user6 = {
     userID: "1003"
 }; 
 
+const user7 = {
+    firstName: "lebron",
+    lastName: "Yap",
+    email: "lebron@dlsu.edu.ph",
+    password: "student123",
+    role: "student",
+    image: "default.jpg",
+    userID: "5004"
+}; 
+
 /* ----- Variable declaretion for (users) search users----- */
-const users = [user1, user2, user3, user4, user5, user6];
+const users = [user1, user2, user3, user4, user5, user6, user7];
 
 /* --------------------- Hard Coded Reservation Data ------------------------ */
 const reserve1 = {
@@ -261,9 +271,14 @@ app.post("/login", express.urlencoded({ extended: true }), (req, res) => {
 /* --------------------- SEARCH USERS for students ------------------------ */
 app.post("/findUser", (req, res) => {
     const { userName } = req.body;
-    const foundUser = users.find(user => `${user.firstName} ${user.lastName}`.toLowerCase() === userName.toLowerCase() || `${user.firstName}` .toLowerCase() === userName.toLowerCase());
-    if (foundUser) {
-        res.render('searchOtherProfile', { userData: foundUser });
+    const lowerCaseUserName = userName.toLowerCase();
+    const foundUsers = users.filter(user => 
+        `${user.firstName.toLowerCase()} ${user.lastName.toLowerCase()}` === lowerCaseUserName ||
+        user.firstName.toLowerCase() === lowerCaseUserName ||
+        user.lastName.toLowerCase() === lowerCaseUserName
+    );
+    if (foundUsers.length > 0) {
+        res.render('searchOtherProfile', { users: foundUsers });
     } else {
         res.send("User not found. <a href='/studentView/searchOtherProfile'>Try again.</a>");
     }
@@ -272,14 +287,18 @@ app.post("/findUser", (req, res) => {
 /* --------------------- SEARCH USERS for LabTechs ------------------------ */
 app.post("/findUser", (req, res) => {
     const { userName } = req.body;
-    const foundUser = users.find(user => `${user.firstName} ${user.lastName}`.toLowerCase() === userName.toLowerCase() || `${user.firstName}` .toLowerCase() === userName.toLowerCase());
-    if (foundUser) {
-        res.render('LsearchOtherProfile', { userData: foundUser });
+    const lowerCaseUserName = userName.toLowerCase();
+    const foundUsers = users.filter(user => 
+        `${user.firstName.toLowerCase()} ${user.lastName.toLowerCase()}` === lowerCaseUserName ||
+        user.firstName.toLowerCase() === lowerCaseUserName ||
+        user.lastName.toLowerCase() === lowerCaseUserName
+    );
+    if (foundUsers.length > 0) {
+        res.render('searchOtherProfile', { users: foundUsers });
     } else {
         res.send("User not found. <a href='/labtechView/LsearchOtherProfile'>Try again.</a>");
     }
 });
-
 
 app.get("/studentPage", isAuthenticated, (req, res) => {
     // Retrieve user data from the session
