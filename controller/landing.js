@@ -11,13 +11,51 @@ router.get('/login', function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/login.html"));
 });
 
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).redirect('/login?error=User not found. Please register.');
+        }
+
+        // Check if passwords match (insecure for production)
+        if (user.password !== password) {
+            return res.status(401).redirect('/login?error=Invalid credentials');
+        }
+
+        // Redirect based on user role
+        switch (user.role) {
+            case 'student':
+                res.redirect('/studentView/studentPage'); // Redirect to student dashboard or main page
+                break;
+            case 'labtech':
+                res.redirect('/labtechView/labtechPage'); // Redirect to lab technician dashboard or main page
+                break;
+            default:
+                res.status(403).send('Unauthorized access');
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).redirect('/login?error=Server error');
+    }
+});
+
 router.get('/register', function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/register.html"));
 });
 
 router.post('/register', async (req, res) => {
+    const { firstName, lastName, email, password, role } = req.body;
+
     try {
-        const { firstName, lastName, email, password, role } = req.body;
+        // Check if the email already exists
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).send('Email already exists');
+        }
 
         const newUser = new User({
             firstName,
@@ -28,10 +66,10 @@ router.post('/register', async (req, res) => {
         });
 
         await newUser.save();
-        res.status(201).send('User registered successfully');
+        res.status(201).redirect('/login');
     } catch (error) {
         console.error(error);
-        res.status(500).send('Server error');
+        res.status(500).redirect('/register');
     }
 });
 
