@@ -39,7 +39,7 @@ app.use(fileUpload());
 /* Handlebars */
 var hbs = require('hbs')
 app.set('view engine', 'hbs');
-
+app.set('views', path.join(__dirname, 'views'));
 
 /***********End export *******************/
 
@@ -114,6 +114,8 @@ const user6 = {
     userID: "1003"
 }; 
 
+/* ----- Variable declaretion for (users) search users----- */
+const users = [user1, user2, user3, user4, user5, user6];
 
 /* --------------------- Hard Coded Reservation Data ------------------------ */
 const reserve1 = {
@@ -256,6 +258,28 @@ app.post("/login", express.urlencoded({ extended: true }), (req, res) => {
     }
 });
 
+/* --------------------- SEARCH USERS ------------------------ */
+app.post("/findUser", (req, res) => {
+    const { userName } = req.body;
+    const foundUser = users.find(user => `${user.firstName} ${user.lastName}`.toLowerCase() === userName.toLowerCase());
+    if (foundUser) {
+        res.render('searchOtherProfile', { userData: foundUser });
+    } else {
+        res.send("User not found. <a href='/studentView/searchOtherProfile'>Try again.</a>");
+    }
+});
+
+app.post("/findUser", (req, res) => {
+    const { userName } = req.body;
+    const foundUser = users.find(user => `${user.firstName} ${user.lastName}`.toLowerCase() === userName.toLowerCase());
+    if (foundUser) {
+        res.render('LsearchOtherProfile', { userData: foundUser });
+    } else {
+        res.send("User not found. <a href='/labtechView/LsearchOtherProfile'>Try again.</a>");
+    }
+});
+
+
 app.get("/studentPage", isAuthenticated, (req, res) => {
     // Retrieve user data from the session
     const userData = req.session.user;
@@ -296,6 +320,6 @@ app.post('/submit-student-data', function(req, res) {
 });
 */
 
-var server = app.listen(3000, function() {
-	console.log("listening to port 3000...");
+var server = app.listen(4000, function() {
+	console.log("listening to port 4000...");
 });

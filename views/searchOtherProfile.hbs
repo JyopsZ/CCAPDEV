@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serch Users Profile</title>
+    <title>Search Users Profile - Student</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
@@ -13,11 +13,10 @@
         <h1>View Profile</h1>
         <nav>
             <ul>
-                <li><a href="subProfile">Back</a></li>
-                <li><a href="studentPage">Home</a></li>
+                <li><a href="/subProfile">Back</a></li>
+                <li><a href="/studentPage">Home</a></li>
             </ul>
         </nav>
-
     </header>
     <main>
         <div class="section-container">
@@ -30,8 +29,17 @@
                     <button type="submit">Find User</button>
                 </form>
             </section>
+            {{#if userData}}
+            <section class="user-profile">
+                <h2>User Profile</h2>
+                <p><strong>First Name:</strong> {{userData.firstName}}</p>
+                <p><strong>Last Name:</strong> {{userData.lastName}}</p>
+                <p><strong>Email:</strong> {{userData.email}}</p>
+                <p><strong>Role:</strong> {{userData.role}}</p>
+                <img src="../images/{{userData.image}}" alt="User Image" height="300px" width="350px">
+            </section>
+            {{/if}}
         </div>
-        
     </main>
     <!-- Footer section with copyright information -->
     <footer>
