@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/')
+mongoose.connect('mongodb://localhost:27017/labdb', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -63,6 +66,58 @@ app.post('/submit-student-data', function(req, res) {
 	res.send (name + " obtained");
 });
 */
+
+
+/* for searching and getting the data of the searched user */
+app.post("/findUserLab2", async (req, res) => {
+    const { userName } = req.body;
+    const lowerCaseUserName = userName.toLowerCase();
+    
+    try {
+        const users = await User.find(); // Retrieve all users from the database
+        const foundUser = users.find(user => 
+            `${user.firstName.toLowerCase()} ${user.lastName.toLowerCase()}` === lowerCaseUserName ||
+            user.firstName.toLowerCase() === lowerCaseUserName ||
+            user.lastName.toLowerCase() === lowerCaseUserName
+        );
+        if (foundUser) {
+            req.session.searchedUser = foundUser;  // Store found user in session
+            res.redirect("/LViewEditProfile");
+        } else {
+            res.send("User not found. <a href='/searchEditProfile'>Try again.</a>");
+        }
+    } catch (err) {
+        console.error('Error fetching user data:', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Route to render the profile view using session data
+app.get("/LViewEditProfile", (req, res) => {
+    const currUserLab = req.session.searchedUser;
+    if (currUserLab) {
+        res.render('LViewEditProfile', { userData: currUserLab });
+    } else {
+        res.send("No user selected. <a href='/searchEditProfile'>Search again.</a>");
+    }
+});
+
+// Route to handle profile edit and re-render the profile view
+app.post("/editInfoLab", async (req, res) => {
+    const currUserLab = req.session.searchedUser;
+    if (currUserLab) {
+        try {
+            await User.updateOne({ _id: currUserLab._id }, req.body); // Update user in the database
+            Object.assign(currUserLab, req.body); // Update the session data
+            res.render('LViewEditProfile', { userData: currUserLab });
+        } catch (err) {
+            console.error('Error updating user data:', err);
+            res.status(500).send('Internal Server Error');
+        }
+    } else {
+        res.send("No user selected. <a href='/searchEditProfile'>Search again.</a>");
+    }
+});
 
 var server = app.listen(3000, function() {
 	console.log("listening to port 3000...");

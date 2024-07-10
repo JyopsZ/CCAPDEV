@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View or Edit Profile - LabTechPage</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <!-- Header section containing the title and navigation menu -->
+  <header>
+    <img src="/images/logo.png" id="logo">
+    <h1>View or Edit Profile</h1>
+    <nav>
+      <ul>
+        <li><a href="/labtechView/searchEditProfile">Back</a></li>
+        <li><a href="/labtechPage">Home</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="section-container">
+      <section class="edit-section">
+        <h2 class="edit-profile">Edit Profile</h2>
+        <form id="editForm" action="/editInfoLab" method="POST">
+          <div class="image-container">
+            <img src="/images/{{userData.image}}" alt="User Image" class="round-image">
+            <button type="button" class="edit-button">Change Photo</button>
+          </div>
+
+          <label for="email">DLSU Email:</label>
+          <input type="text" id="email" name="email" value="{{userData.email}}" readonly>
+
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" value="{{userData.firstName}}">
+
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" value="{{userData.lastName}}">
+
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" value="{{userData.password}}">
+
+          <button type="submit" class="edit-button" id="saveButton">Save</button>
+        </form>
+      </section>
+    </div>
+  </main>
+  <!-- Footer section with copyright information -->
+  <footer class="edit-footer">
+    <p>&copy; 2024 LabLink. All rights reserved.</p>
+  </footer>
+</body>
+</html>
