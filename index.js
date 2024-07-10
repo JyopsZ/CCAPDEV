@@ -303,6 +303,7 @@ app.post("/findUser2", (req, res) => {
 });
 
 /* --------------------- SEARCH and EDIT profile for LABTECH ------------------------ */
+// Route to handle user search and set session data
 app.post("/findUserLab2", (req, res) => {
     const { userName } = req.body;
     const lowerCaseUserName = userName.toLowerCase();
@@ -315,10 +316,11 @@ app.post("/findUserLab2", (req, res) => {
         req.session.searchedUser = foundUser;  // Store found user in session
         res.redirect("/LViewEditProfile");
     } else {
-        res.send("User not found. <a href='searchEditProfile'>Try again.</a>");
+        res.send("User not found. <a href='/searchEditProfile'>Try again.</a>");
     }
 });
 
+// Route to render the profile view using session data
 app.get("/LViewEditProfile", (req, res) => {
     const currUserLab = req.session.searchedUser;
     if (currUserLab) {
@@ -328,6 +330,7 @@ app.get("/LViewEditProfile", (req, res) => {
     }
 });
 
+// Route to handle profile edit and re-render the profile view
 app.post("/editInfoLab", (req, res) => {
     const currUserLab = req.session.searchedUser;
     if (currUserLab) {
@@ -337,6 +340,7 @@ app.post("/editInfoLab", (req, res) => {
         res.send("No user selected. <a href='/searchEditProfile'>Search again.</a>");
     }
 });
+
 /* --------------------- EDIT PROFILE ------------------------ */
 app.get("/ViewEditProfile", (req, res) => {
     

@@ -13,8 +13,8 @@
             <h1>View or Edit Profile</h1>
             <nav>
                 <ul>
-                <li><a href="/labtechView/LSubProfile">Back</a></li>
-                <li><a href="/labtechPage">Home</a></li>
+                    <li><a href="/labtechView/searchEditProfile">Back</a></li>
+                    <li><a href="/labtechPage">Home</a></li>
                 </ul>
             </nav>
         </header>
@@ -24,27 +24,22 @@
                     <h2 class="edit-profile">Edit Profile</h2>
                     <form id="editForm" action="/editInfoLab" method="POST">
                         <div class="image-container">
-                            <!-- Email input field -->
-                            <img src="../images/default.jpg" alt="Round Image" class="round-image">
+                            <img src="../images/{{userData.image}}" alt="User Image" class="round-image">
                             <button type="button" class="edit-button">Change Photo</button>
                         </div>
                         
                         <label for="email">DLSU Email:</label>
                         <input type="text" id="email" name="email" value="{{userData.email}}" readonly>
 
-                        <!-- FirstName input field -->
                         <label for="FirstName">First Name:</label>
                         <input type="text" id="FirstName" name="FirstName" value="{{userData.firstName}}">
 
-                        <!-- LastName input field -->
                         <label for="LastName">Last Name:</label>
                         <input type="text" id="LastName" name="LastName" value="{{userData.lastName}}">
 
-                        <!-- Password input field -->
                         <label for="password">Password:</label>
                         <input type="text" id="password" name="password" value="{{userData.password}}">
 
-                        <!-- Submit button to save -->
                         <button type="submit" class="edit-button" id="saveButton">Save</button>
                     </form>
                 </section>
