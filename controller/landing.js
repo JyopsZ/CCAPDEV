@@ -26,6 +26,9 @@ router.post('/login', async (req, res) => {
             return res.status(401).redirect('/login?error=Invalid credentials');
         }
 
+        // Store user data in session
+        req.session.userID = user.userID; // Store user in session
+
         // Redirect based on user role
         switch (user.role) {
             case 'student':

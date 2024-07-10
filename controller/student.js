@@ -1,6 +1,9 @@
 var express = require('express');
+const session = require("express-session");
 var router = express.Router();
 var path = require('path');
+const UserModel = require('../model/user');
+
 
 //Student studentPage
 router.get('/studentView/studentPage', function(req, res) {
@@ -55,8 +58,11 @@ router.get('/studentView/lab3', function(req, res) {
 
 
 // Student subProfile
-router.get('/studentView/ViewEditProfile', function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/ViewEditProfile.html"));
+router.get('/studentView/ViewEditProfile' , async (req, res) => {
+	const userId = req.session.userID;
+    const userData = await UserModel.find({userID:userId}) // select * from Post where userID == userData.userID
+    console.log(userData)
+    res.render('ViewEditProfile',{userData})
 });
 
 router.get('/studentView/searchOtherProfile', function(req, res) {
