@@ -271,38 +271,72 @@ app.post("/login", express.urlencoded({ extended: true }), (req, res) => {
 });
 
 /* --------------------- SEARCH USERS for students ------------------------ */
-app.post("/findUser", (req, res) => {
+app.post("/findUser1", (req, res) => {
     const { userName } = req.body;
     const lowerCaseUserName = userName.toLowerCase();
     const foundUsers = users.filter(user => 
-        `${user.firstName.toLowerCase()} ${user.lastName.toLowerCase()}` === lowerCaseUserName ||
         user.firstName.toLowerCase() === lowerCaseUserName ||
-        user.lastName.toLowerCase() === lowerCaseUserName
+        user.lastName.toLowerCase() === lowerCaseUserName ||
+        `${user.firstName.toLowerCase()} ${user.lastName.toLowerCase()}` === lowerCaseUserName
     );
     if (foundUsers.length > 0) {
         res.render('searchOtherProfile', { users: foundUsers });
     } else {
-        res.send("User not found. <a href='searchOtherProfile'>Try again.</a>");
+        res.send("User not found. <a href='/studentView/searchOtherProfile'>Try again.</a>");
     }
 });
 
 /* --------------------- SEARCH USERS for LabTechs ------------------------ */
-app.post("/findUserLab", (req, res) => {
+app.post("/findUser2", (req, res) => {
     const { userName } = req.body;
     const lowerCaseUserName = userName.toLowerCase();
     const foundUsers = users.filter(user => 
+        user.firstName.toLowerCase() === lowerCaseUserName ||
+        user.lastName.toLowerCase() === lowerCaseUserName ||
+        `${user.firstName.toLowerCase()} ${user.lastName.toLowerCase()}` === lowerCaseUserName
+    );
+    if (foundUsers.length > 0) {
+        res.render('LsearchOtherProfile', { users: foundUsers });
+    } else {
+        res.send("User not found. <a href='/labtechView/LsearchOtherProfile'>Try again.</a>");
+    }
+});
+
+/* --------------------- SEARCH and EDIT profile for LABTECH ------------------------ */
+app.post("/findUserLab2", (req, res) => {
+    const { userName } = req.body;
+    const lowerCaseUserName = userName.toLowerCase();
+    const foundUser = users.find(user => 
         `${user.firstName.toLowerCase()} ${user.lastName.toLowerCase()}` === lowerCaseUserName ||
         user.firstName.toLowerCase() === lowerCaseUserName ||
         user.lastName.toLowerCase() === lowerCaseUserName
     );
-    if (foundUsers.length > 0) {
-        res.render('searchOtherProfile', { users: foundUsers });
+    if (foundUser) {
+        req.session.searchedUser = foundUser;  // Store found user in session
+        res.redirect("/LViewEditProfile");
     } else {
-        res.send("User not found. <a href='LsearchOtherProfile'>Try again.</a>");
+        res.send("User not found. <a href='searchEditProfile'>Try again.</a>");
     }
 });
 
+app.get("/LViewEditProfile", (req, res) => {
+    const currUserLab = req.session.searchedUser;
+    if (currUserLab) {
+        res.render('LViewEditProfile', { userData: currUserLab });
+    } else {
+        res.send("No user selected. <a href='/searchEditProfile'>Search again.</a>");
+    }
+});
 
+app.post("/editInfoLab", (req, res) => {
+    const currUserLab = req.session.searchedUser;
+    if (currUserLab) {
+        Object.assign(currUserLab, req.body);
+        res.render('LViewEditProfile', { userData: currUserLab });
+    } else {
+        res.send("No user selected. <a href='/searchEditProfile'>Search again.</a>");
+    }
+});
 /* --------------------- EDIT PROFILE ------------------------ */
 app.get("/ViewEditProfile", (req, res) => {
     
@@ -350,8 +384,6 @@ app.get("/logout", (req, res) => {
         res.redirect("/");
     });
 });
-
-
 
 
 
