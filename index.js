@@ -26,6 +26,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 //app.use(express.static(__dirname)); // legacy code in case of emergency
 
+app.use(express.json());
+app.use(fileUpload());
+
 app.use(express.static(path.join(__dirname + "/public"))); 
 
 // Session middleware setup
@@ -42,27 +45,9 @@ app.use('/', landingRoutes);
 app.use('/', studentRoutes);
 app.use('/', labtechRoutes);
 
-app.use(express.json());
-app.use(fileUpload());
-
 /* Handlebars */
 var hbs = require('hbs')
 app.set('view engine','hbs');
-
-
-/*
-app.get('/submit-student-data', function(req, res) {
-	
-	var name = req.query.firstName + " " + req.query.lastName;
-	res.send (name + " obtained");
-});
-
-app.post('/submit-student-data', function(req, res) {
-	
-	var name = req.body.firstName + " " + req.body.lastName;
-	res.send (name + " obtained");
-});
-*/
 
 var server = app.listen(3000, function() {
 	console.log("listening to port 3000...");

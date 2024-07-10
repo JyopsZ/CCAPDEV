@@ -27,15 +27,16 @@ router.post('/login', async (req, res) => {
         }
 
         // Store user data in session
-        req.session.userID = user.userID; // Store user in session
+        //req.session.userID = user.userID; // Store user in session
+        req.session.user = user;
 
         // Redirect based on user role
         switch (user.role) {
             case 'student':
-                res.redirect('/studentView/studentPage'); // Redirect to student dashboard or main page
+                res.render('studentPage', {user}); // Redirect to student dashboard or main page
                 break;
             case 'labtech':
-                res.redirect('/labtechView/labtechPage'); // Redirect to lab technician dashboard or main page
+                res.render('labtechPage', {user}); // Redirect to lab technician dashboard or main page
                 break;
             default:
                 res.status(403).send('Unauthorized access');
@@ -74,6 +75,14 @@ router.post('/register', async (req, res) => {
         console.error(error);
         res.status(500).redirect('/register');
     }
+});
+
+router.get("/logout", (req, res) => {
+    // Destroy the session and redirect to the login page
+    req.session.destroy(() => {
+        res.clearCookie("sessionId");
+        res.redirect("/");
+    });
 });
 
 module.exports = router;
