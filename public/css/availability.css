@@ -57,3 +57,9 @@
     border: none;
     cursor: pointer;
 }
+
+.labLayout {
+
+    display: flex;
+    flex-direction: column;
+}

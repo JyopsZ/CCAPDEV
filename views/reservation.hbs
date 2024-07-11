@@ -23,7 +23,7 @@
         <h1>Make a Reservation</h1>
         <nav>
             <ul>
-                <li><a href="subReservation">Back</a></li>
+                <li><a href="/studentView/subReservation">Back</a></li>
                 <li><a href="../../studentPage">Home</a></li>
             </ul>
         </nav>
@@ -53,6 +53,9 @@
                     <option value="nineThirty">9:30 - 10:00 AM</option>
                     <option value="ten">10:00 - 10:30 AM</option>
                 </select>
+
+                <label for="reserver">Reserved By:</label>
+                <input type="text" id="reserver" value="{{firstName}} {{lastName}}">
 
                 <!-- Submit button to check availability -->
                 <button type="submit">Submit</button>

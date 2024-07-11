@@ -206,4 +206,13 @@ router.post("/findUser", async (req, res) => {
     }
 });
 
+// Student Reservation
+router.get('/reservation', function(req, res) {
+    const user = req.session.user;
+    res.render('reservation', {
+        firstName: user.firstName,
+        lastName: user.lastName
+    });
+});
+
 module.exports = router;
