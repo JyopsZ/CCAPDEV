@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const reserveSchema = new mongoose.Schema({
     labName: String,
@@ -9,6 +10,7 @@ const reserveSchema = new mongoose.Schema({
     reservationID: Number
 })
 
+reserveSchema.plugin(AutoIncrement, { inc_field: 'reservationID', start_seq: 1002 });
 const Reservation = mongoose.model('Reservation', reserveSchema)
 
 module.exports = Reservation

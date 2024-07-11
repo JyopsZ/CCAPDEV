@@ -230,8 +230,7 @@ router.post('/reservation', async (req, res) => {
             labName,
             date,
             time,
-            reserver,
-            reservationID
+            reserver
         });
 
         await newReserve.save();
