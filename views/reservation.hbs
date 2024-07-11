@@ -35,8 +35,8 @@
             <h2>Reserve a Seat</h2>
             <form id="reservation" action="" method="POST">
                 <!-- Laboratory selection dropdown -->
-                <label for="lab">Select Laboratory:</label>
-                <select id="lab" name="lab" required>
+                <label for="labName">Select Laboratory:</label>
+                <select id="labName" name="labName" required>
                     <option value="lab1">Lab Alpha</option>
                     <option value="lab2">Lab Beta</option>
                     <option value="lab3">Lab Charlie</option>
@@ -55,7 +55,7 @@
                 </select>
 
                 <label for="reserver">Reserved By:</label>
-                <input type="text" id="reserver" value="{{firstName}} {{lastName}}">
+                <input type="text" id="reserver" name="reserver" value="{{firstName}} {{lastName}}">
 
                 <!-- Submit button to check availability -->
                 <button type="submit">Submit</button>
