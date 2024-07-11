@@ -1,0 +1,91 @@
+[{
+  "_id": {
+    "$oid": "668d6a16d0ce1d254be65197"
+  },
+  "firstName": "Mykel",
+  "lastName": "Tiu",
+  "email": "mykel@gmail.com",
+  "password": "lab",
+  "role": "student",
+  "image": null,
+  "userID": 5004,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668d705d3ed8c31c870a2c09"
+  },
+  "firstName": "Andrew",
+  "lastName": "Meda",
+  "email": "andrew.meda@dlsu.edu.ph",
+  "password": "lab123",
+  "role": "labtech",
+  "image": "andrew.jpg",
+  "userID": 1003,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668d70883ed8c31c870a2c0b"
+  },
+  "firstName": "Sarah",
+  "lastName": "Gateway",
+  "email": "sarah.gateway@dlsu.edu.ph",
+  "password": "lab123",
+  "role": "labtech",
+  "image": "sarah.jpg",
+  "userID": 1002,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668d70a63ed8c31c870a2c0d"
+  },
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@dlsu.edu.ph",
+  "password": "lab123",
+  "role": "labtech",
+  "image": "john.jpg",
+  "userID": 1001,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668d70cd3ed8c31c870a2c0f"
+  },
+  "firstName": "Brad",
+  "lastName": "Pitt",
+  "email": "brad_pitt@dlsu.edu.ph",
+  "password": "student123",
+  "role": "student",
+  "image": "brad.jpg",
+  "userID": 5003,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668d70ec3ed8c31c870a2c11"
+  },
+  "firstName": "Liam",
+  "lastName": "Anderson",
+  "email": "liam_anderson@dlsu.edu.ph",
+  "password": "student123",
+  "role": "student",
+  "image": "stock.jpg",
+  "userID": 5002,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668d710b3ed8c31c870a2c13"
+  },
+  "firstName": "Timmy",
+  "lastName": "Yap",
+  "email": "timmy_yap@dlsu.edu.ph",
+  "password": "student123",
+  "role": "student",
+  "image": "default.jpg",
+  "userID": 5001,
+  "__v": 0
+}]
