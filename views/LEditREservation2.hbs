@@ -51,6 +51,16 @@
                 <label for="editdate">Select New Date:</label>
                 <input type="date" id="editdate" name="editdate" value="{{specificReserve.date}}" required>
 
+                <label for="edittime">Select Time:</label>
+                <select id="edittime" name="edittime" value="{{specificReserve.time}}"required>
+                    <option value="nine" >9:00 - 9:30 AM</option>
+                    <option value="nineThirty" >9:30 - 10:00 AM</option>
+                    <option value="ten" >10:00 - 10:30 AM</option>
+                </select>
+
+                <label for="editSeat">Select Seat:</label>
+                <input type="text" id="editSeat" name="editSeat" value="{{specificReserve.seatPos}}">
+
                 <!-- Submit button to update the reservation -->
                 <button type="submit">Update Reservation</button>
             </form>
