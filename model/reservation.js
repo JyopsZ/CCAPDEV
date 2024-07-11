@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 const reserveSchema = new mongoose.Schema({
-    firstName: String,
-    lastName: String,
+    labName: String,
+    date: String,
     time: String,
     reserver: String,
     image: String
