@@ -3,7 +3,7 @@ const session = require("express-session");
 var router = express.Router();
 var path = require('path');
 const UserModel = require('../model/user');
-
+const ReservationModel = require('../model/reservation');
 
 //Student studentPage
 router.get('/studentView/studentPage', function(req, res) {
@@ -73,7 +73,7 @@ router.get('/studentView/ViewEditProfile' , async (req, res) => {
     console.log(userData)
     res.render('ViewEditProfile',{userData})
 });
-*/
+*/ 
 
 router.get('/studentView/searchOtherProfile', function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/searchOtherProfile.html"));
@@ -215,6 +215,32 @@ router.get('/reservation', function(req, res) {
     });
 });
 
+router.post('/reservation', async (req, res) => {
+    const { labName, date, time, reserver} = req.body;
+    const reservationID = 1001;
+
+    try {
+        // Check if the email already exists
+        const existingReserve = await ReservationModel.findOne({ labName, date, time });
+        if (existingReserve) {
+            return res.status(400).send('slot already taken');
+        }
+
+        const newReserve = new ReservationModel({
+            labName,
+            date,
+            time,
+            reserver,
+            reservationID
+        });
+
+        await newReserve.save();
+        res.status(201).redirect('/studentView/subReservation');
+    } catch (error) {
+        console.error(error);
+        res.status(500).redirect('/reservation');
+    }
+});
 /* --------------------- Edit Reservation for Students ------------------------ */
 router.get('/editReservation', function(req, res) {
     const reservationID = 1005;
