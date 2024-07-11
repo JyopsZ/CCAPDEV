@@ -215,6 +215,13 @@ router.get('/reservation', function(req, res) {
     });
 });
 
+/* --------------------- Edit Reservation for Students ------------------------ */
+router.get('/editReservation', function(req, res) {
+    const reservationID = 1005;
+
+    res.render('editReservation', { reservationID: reservationID });
+});
+
 
 /* --------------------- Delete own Profile for Students ------------------------ */
 router.post('/deleteUser', async (req, res) => {
