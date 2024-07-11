@@ -323,4 +323,22 @@ router.post("/tooltipLab", async (req, res) => {
     }
 });
 
+/* --------------------- Lab Technician Check Seat Availability ------------------------ */
+router.get('/LViewAvailable', function(req, res) {
+    const user = req.session.user;
+    res.render('LViewAvailable');
+});
+
+// Route to fetch reservations
+router.get('/viewSeatsLab', async (req, res) => {
+    const { labName, date, time } = req.query;
+    try {
+        const viewSeatsLab = await ReservationModel.find({ labName, date, time });
+        res.json(viewSeatsLab);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching seats');
+    }
+});
+
 module.exports = router;
