@@ -206,7 +206,7 @@ router.post("/findUser", async (req, res) => {
     }
 });
 
-// Student Reservation
+/* --------------------- Reservation for Students ------------------------ */
 router.get('/reservation', function(req, res) {
     const user = req.session.user;
     res.render('reservation', {
@@ -215,4 +215,17 @@ router.get('/reservation', function(req, res) {
     });
 });
 
+
+/* --------------------- Delete own Profile for Students ------------------------ */
+router.post('/deleteUser', async (req, res) => {
+    try {
+        const userId = req.session.user.userID;
+        await UserModel.deleteOne({ userID: userId });
+        req.session.destroy();
+        res.redirect('/');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+});
 module.exports = router;
