@@ -277,4 +277,44 @@ router.post('/deleteUser', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+/* --------------------- Display User Profile from Tooltip Press ------------------------ */
+router.post("/tooltip", async (req, res) => {
+    try {
+        const { userName } = req.body;
+        const lowerCaseName = userName.toLowerCase();
+
+        let filter = {};
+
+        const names = lowerCaseName.trim().split(' ');
+        
+        if (names.length === 2) {
+            filter = {
+                $or: [
+                    { firstName: new RegExp(names[0], 'i'), lastName: new RegExp(names[1], 'i') },
+                    { firstName: new RegExp(names[1], 'i'), lastName: new RegExp(names[0], 'i') }
+                ]
+            };
+        } else if (names.length === 1) {
+            filter = {
+                $or: [
+                    { firstName: new RegExp(names[0], 'i') },
+                    { lastName: new RegExp(names[0], 'i') }
+                ]
+            };
+        }
+
+        console.log("Search filter:", filter);
+
+        const users = await UserModel.find(filter);
+
+        console.log("Found users:", users);
+
+        res.render('tooltipViewUser', { userData: users });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 module.exports = router;
