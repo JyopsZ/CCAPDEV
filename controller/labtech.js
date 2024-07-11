@@ -63,7 +63,7 @@ router.get('/labtechView/lab3', function(req, res) {
 
 
 // Lab Tech LSubProfile
-router.get('/labtechView/LsearchEditProfile', function(req, res) {
+router.get('/labtechView/searchEditProfile', function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/searchEditProfile.html"));
 });
 
@@ -73,12 +73,21 @@ router.get('/labtechView/LsearchOtherProfile', function(req, res) {
 
 
 // Lab Tech LViewEditProfile
-router.get('views/LsearchEditProfile', function(req, res) {
-	res.render(path.join(__dirname + "\\" + "views/LsearchEditProfile"));
+router.get('/labtechView/LsearchEditProfile', function(req, res) {
+	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LsearchEditProfile.html"));
 });
 
 router.get('/labtechView/LViewOtherProfile', function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LViewOtherProfile.html"));
+});
+
+
+// Labtech Page
+router.get("/labtechPage", (req, res) => {
+    // Retrieve user data from the session
+    const user = req.session.user;
+    console.log(user);
+    res.render('labtechPage',{user});
 });
 
 router.get('/LViewEditProfile' , async (req, res) => {
@@ -91,10 +100,10 @@ router.get('/LViewEditProfile' , async (req, res) => {
 // Handling of form data to database
 router.post('/editInfolabtech', async (req, res) => {
     try {
-        const { firstName, lastName, password } = req.body;
+        const { id, firstName, lastName, password } = req.body;
 
         // Find the user by userID
-        const userId = req.session.user.userID;
+        const userId = id;
         const user = await UserModel.findOne({ userID: userId });
 
         // Update the user's information
@@ -105,15 +114,7 @@ router.post('/editInfolabtech', async (req, res) => {
         // Save the updated user to the database
         await user.save();
 
-		// Update the session data with the new user information
-        req.session.user = {
-            userID: user.userID,
-            firstName: user.firstName,
-            lastName: user.lastName,
-			password: user.password
-        };
-
-        res.redirect('/studentPage');
+        res.redirect('/labtechPage');
     } catch (err) {
         console.error(err);
         res.status(500).send('Internal Server Error');
@@ -157,8 +158,46 @@ router.post('/editImgLabtech', async (req, res) => {
     }
 });
 
-/* --------------------- SEARCH USERS for labtechs ------------------------ */
+/* --------------------- EDIT USERS for labtechs ------------------------ */
 router.post("/findUser2", async (req, res) => {
+    try {
+        const { userName } = req.body;
+        const lowerCaseName = userName.toLowerCase();
+
+        const names = lowerCaseName.trim().split(' ');
+
+        if (names.length !== 2) {
+            return res.status(404).redirect('/labtechView/searchEditProfile?error=Please Enter First & Last Name.');
+        }
+
+        const filter = {
+            $or: [
+                { firstName: new RegExp(names[0], 'i'), lastName: new RegExp(names[1], 'i') },
+                { firstName: new RegExp(names[1], 'i'), lastName: new RegExp(names[0], 'i') }
+            ]
+        };
+
+        console.log("Search filter:", filter);
+
+        const users = await UserModel.find(filter);
+
+        console.log("Found users:", users);
+
+        if (users.length === 0) {
+            
+            return res.status(404).redirect('/labtechView/searchEditProfile?error=User not found.');
+        }
+
+        res.render('LViewEditProfile', { userData: users });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+/* --------------------- SEARCH USERS for labtechs ------------------------ */
+router.post("/viewUserLab", async (req, res) => {
+
     try {
         const { userName } = req.body;
         const lowerCaseName = userName.toLowerCase();
@@ -189,11 +228,12 @@ router.post("/findUser2", async (req, res) => {
 
         console.log("Found users:", users);
 
-        res.render('LViewEditProfile', { userData: users });
+        res.render('LViewOtherProfile', { userData: users });
     } catch (err) {
         console.error(err);
         res.status(500).send('Internal Server Error');
     }
+
 });
 
 module.exports = router;

@@ -13,7 +13,8 @@
         <h1>View Profile</h1>
         <nav>
             <ul>
-                <li><a href="labtechPage">Home</a></li>
+                <li><a href="LSubProfile">Back</a></li>
+                <li><a href="../../labtechPage">Home</a></li>
 
             </ul>
         </nav>
@@ -23,12 +24,12 @@
         <div class="section-container">
             <section class="search-form">
                 <h2>Search for User</h2>
-                <form>
+                <form action="/viewUserLab" method="POST">
                     <!-- User Search -->
                     Enter Name to Find User:
-                    <input type="text" required>
+                    <input type="text" id="userName" name="userName" required>
     
-                    <button type="submit" onclick="location.href='LViewOtherProfile'">Find User</button>
+                    <button type="submit">Find User</button>
                 </form>
             </section>
         </div>
