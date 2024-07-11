@@ -3,6 +3,7 @@ const session = require("express-session");
 var router = express.Router();
 var path = require('path');
 const UserModel = require('../model/user');
+const ReservationModel = require('../model/reservation');
 
 /**************************************** LAB TECHNICIAN ********************************************/
 
@@ -236,11 +237,90 @@ router.post("/viewUserLab", async (req, res) => {
 
 });
 
-/* --------------------- RESERVATION for a student ------------------------ */
+/* --------------------- RESERVATION for a student (labtech side) ------------------------ */
 router.get('/LReservation', function(req, res) {
-    
     res.render('LReservation');
 });
 
+// Route to fetch reservations
+router.get('/LReservations', async (req, res) => {
+    const { labName, date, time } = req.query;
+    try {
+        const LReservations = await ReservationModel.find({ labName, date, time });
+        res.json(LReservations);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching reservations');
+    }
+});
+
+// Route to create a new reservation
+router.post('/LReservation', async (req, res) => {
+    const { labName, seatRow, seatCol, date, time, reserver } = req.body;
+    const seatPos = [parseInt(seatRow), parseInt(seatCol)];
+    const reservationID = Math.floor(Math.random() * 10000); // Generate a random reservation ID
+
+    try {
+        // Check if the seat is already taken
+        const existingReserve = await ReservationModel.findOne({ labName, date, time, seatPos });
+        if (existingReserve) {
+            res.status(500).redirect('/LReservation');
+        }
+
+        const newReserve = new ReservationModel({
+            labName,
+            seatPos,
+            date,
+            time,
+            reserver,
+            reservationID
+        });
+
+        await newReserve.save();
+        res.status(201).redirect('/labtechView/LSubReservation');
+    } catch (error) {
+        console.error(error);
+        res.status(500).redirect('/LReservation');
+    }
+});
+
+/* --------------------- Display User Profile from Tooltip Press ------------------------ */
+router.post("/tooltipLab", async (req, res) => {
+    try {
+        const { userName } = req.body;
+        const lowerCaseName = userName.toLowerCase();
+
+        let filter = {};
+
+        const names = lowerCaseName.trim().split(' ');
+        
+        if (names.length === 2) {
+            filter = {
+                $or: [
+                    { firstName: new RegExp(names[0], 'i'), lastName: new RegExp(names[1], 'i') },
+                    { firstName: new RegExp(names[1], 'i'), lastName: new RegExp(names[0], 'i') }
+                ]
+            };
+        } else if (names.length === 1) {
+            filter = {
+                $or: [
+                    { firstName: new RegExp(names[0], 'i') },
+                    { lastName: new RegExp(names[0], 'i') }
+                ]
+            };
+        }
+
+        console.log("Search filter:", filter);
+
+        const users = await UserModel.find(filter);
+
+        console.log("Found users:", users);
+
+        res.render('LTooltipViewUser', { userData: users });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 module.exports = router;
