@@ -300,7 +300,7 @@ router.post('/editReservation', async (req, res) => {
     const { reservId } = req.body;
     const specificReserve = await ReservationModel.findOne({ reservationID: reservId });
     console.log(specificReserve);
-    res.render('LEditReservation', {specificReserve});
+    res.render('EditReservation2', {specificReserve});
 });
 
 router.post('/updateReservation', async (req, res) => {
@@ -311,7 +311,7 @@ router.post('/updateReservation', async (req, res) => {
     
     if (existingReservation) {
         // If there is a clash, inform the user
-        return res.render('LEditReservation', {specificReserve: await ReservationModel.findOne({ reservationID: reservationid }), error: 'The selected date and lab are already reserved.'});
+        return res.render('EditReservation2', {specificReserve: await ReservationModel.findOne({ reservationID: reservationid }), error: 'The selected date and lab are already reserved.'});
     }
     
     // If no clash, proceed to update the reservation
@@ -321,7 +321,7 @@ router.post('/updateReservation', async (req, res) => {
     );
 
     console.log(specificReserve);
-    res.render('LEditReservation', {specificReserve, success: 'Reservation updated successfully.'});
+    res.render('EditReservation2', {specificReserve, success: 'Reservation updated successfully.'});
 });
 
 
