@@ -236,4 +236,11 @@ router.post("/viewUserLab", async (req, res) => {
 
 });
 
+/* --------------------- RESERVATION for a student ------------------------ */
+router.get('/LReservation', function(req, res) {
+    
+    res.render('LReservation');
+});
+
+
 module.exports = router;
