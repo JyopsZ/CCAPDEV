@@ -206,7 +206,7 @@ router.post("/findUser", async (req, res) => {
     }
 });
 
-/* --------------------- Reservation for Students ------------------------ */
+/* --------------------- Student RESERVATION ------------------------ */
 router.get('/reservation', function(req, res) {
     const user = req.session.user;
     res.render('reservation', {
