@@ -283,6 +283,8 @@ router.post('/reservation', async (req, res) => {
 
 /* --------------------- Edit Reservation for Students ------------------------ */
 router.get('/view-list-reservations', async (req, res) => {
+    
+    /*
     const getSessionUID = req.session.user.userID;
     const getUserID = await UserModel.findOne({ userID: getSessionUID });
     const firstName = getUserID.firstName;
@@ -290,6 +292,9 @@ router.get('/view-list-reservations', async (req, res) => {
     const fullName = `${firstName} ${lastName}`;
     const getReservations = await ReservationModel.find({ reserver: fullName });
     res.render('view-list-reservations', { getReservations });
+    */
+    const allReservations = await ReservationModel.find({});
+    res.render('view-list-reservations', { getReservations: allReservations });
 });
 
 router.get('/editReservation', async (req, res) => {

@@ -25,7 +25,8 @@
             <section class="view-Reservationsub" data-reservation-id="{{this.reservationID}}">
                 <div id="viewForm">
                     <h2>{{this.labName}} - Seat {{this.seatPos}}</h2>
-                    <p>ID: {{this.reservationID}}</p>
+                    <span class="bold">ID: </span> {{this.reservationID}} </br>
+                    <span class="bold">Reserved By: </span> {{this.reserver}} </br>
                     <span class="bold">Date: </span> {{this.date}} <span class="time">{{this.time}}</span>
                 </div>
             </section>
