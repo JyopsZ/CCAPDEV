@@ -215,22 +215,38 @@ router.get('/reservation', function(req, res) {
     });
 });
 
+// Route to fetch reservations
+router.get('/reservations', async (req, res) => {
+    const { labName, date, time } = req.query;
+    try {
+        const reservations = await ReservationModel.find({ labName, date, time });
+        res.json(reservations);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching reservations');
+    }
+});
+
+// Route to create a new reservation
 router.post('/reservation', async (req, res) => {
-    const { labName, date, time, reserver} = req.body;
-    const reservationID = 1001;
+    const { labName, seatRow, seatCol, date, time, reserver } = req.body;
+    const seatPos = [parseInt(seatRow), parseInt(seatCol)];
+    const reservationID = Math.floor(Math.random() * 10000); // Generate a random reservation ID
 
     try {
-        // Check if the email already exists
-        const existingReserve = await ReservationModel.findOne({ labName, date, time });
+        // Check if the seat is already taken
+        const existingReserve = await ReservationModel.findOne({ labName, date, time, seatPos });
         if (existingReserve) {
-            return res.status(400).send('slot already taken');
+            res.status(500).redirect('/reservation');
         }
 
         const newReserve = new ReservationModel({
             labName,
+            seatPos,
             date,
             time,
-            reserver
+            reserver,
+            reservationID
         });
 
         await newReserve.save();
@@ -240,6 +256,7 @@ router.post('/reservation', async (req, res) => {
         res.status(500).redirect('/reservation');
     }
 });
+
 /* --------------------- Edit Reservation for Students ------------------------ */
 router.get('/editReservation', function(req, res) {
     const reservationID = 1005;
