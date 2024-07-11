@@ -327,6 +327,39 @@ router.post('/LReservation', async (req, res) => {
     }
 });
 
+/* --------------------- Edit Reservation for Students ------------------------ */
+router.get('/LEditReservation', async (req, res) => {
+    res.render('LEditReservation');
+});
+
+router.post('/LEditReservation', async (req, res) => {
+    const { reservId } = req.body;
+    const specificReserve = await ReservationModel.findOne({ reservationID: reservId });
+    console.log(specificReserve);
+    res.render('LEditReservation2', {specificReserve});
+});
+
+router.post('/updateReservationLab', async (req, res) => {
+    const { reservationid, editlab, editdate } = req.body;
+    
+    // Check if there is an existing reservation with the same lab and date
+    const existingReservation = await ReservationModel.findOne({ labName: editlab, date: editdate });
+    
+    if (existingReservation) {
+        // If there is a clash, inform the user
+        return res.render('LEditReservation2', {specificReserve: await ReservationModel.findOne({ reservationID: reservationid }), error: 'The selected date and lab are already reserved.'});
+    }
+    
+    // If no clash, proceed to update the reservation
+    const specificReserve = await ReservationModel.findOneAndUpdate(
+        { reservationID: reservationid },
+        { labName: editlab, date: editdate }
+    );
+
+    console.log(specificReserve);
+    res.render('LEditReservation2', {specificReserve, success: 'Reservation updated successfully.'});
+});
+
 /* --------------------- Display User Profile from Tooltip Press ------------------------ */
 router.post("/tooltipLab", async (req, res) => {
     try {
