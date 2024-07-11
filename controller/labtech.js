@@ -98,6 +98,49 @@ router.get('/LViewEditProfile' , async (req, res) => {
     res.render('LViewEditProfile',{userData})
 });
 
+// editing of user profile with picture
+// Handling of form data to database
+router.post('/editUserProfileWithImage', async (req, res) => {
+    try {
+        const { userId, firstName, lastName, password } = req.body; // Include userId in the request body
+
+        // Find the user by userID
+        const user = await UserModel.findOne({ userID: userId });
+
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        // Update the user's information
+        user.firstName = firstName;
+        user.lastName = lastName;
+        user.password = password;
+
+        if (req.files && req.files.imageUpload) {
+            const imageFile = req.files.imageUpload;
+            const uploadPath = path.join(__dirname, '../public/images', `${Date.now()}-${imageFile.name}`);
+
+            // Move the file to the desired location
+            imageFile.mv(uploadPath, (err) => {
+                if (err) {
+                    console.error('Error uploading file:', err);
+                    return res.status(500).send('Internal Server Error');
+                }
+            });
+
+            user.image = path.basename(uploadPath); // Store the filename of the uploaded image
+        }
+
+        // Save the updated user to the database
+        await user.save();
+
+        res.redirect('/labtechPage'); // Adjust this as needed
+    } catch (err) {
+        console.error('Error updating user information:', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 // Handling of form data to database
 router.post('/editInfolabtech', async (req, res) => {
     try {

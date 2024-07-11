@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017/')
-
+const multer = require('multer');
 const express = require('express')
 const bodyParser = require('body-parser')
 const session = require("express-session")
@@ -16,11 +16,6 @@ const Reservation = require("./model/reservation")
 const Profile = require("./model/profile")
 const User = require("./model/user")
 
-/*  Importing of Routes From Controller Folder  */
-const landingRoutes = require('./controller/landing')
-const studentRoutes = require('./controller/student')
-const labtechRoutes = require('./controller/labtech')
-
 app.use(express.json()) // use json
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -29,7 +24,6 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(fileUpload());
 
-app.use(express.static(path.join(__dirname + "/public"))); 
 
 // Session middleware setup
 app.use(
@@ -39,6 +33,19 @@ app.use(
         saveUninitialized: false,
     })
 );
+
+app.use(express.static(path.join(__dirname + "/public"))); 
+
+const userRoutes = require('./controller/student');
+app.use('/user', userRoutes);
+
+const userRoutesLab = require('./controller/labtech');
+app.use('/user', userRoutesLab);
+
+/*  Importing of Routes From Controller Folder  */
+const landingRoutes = require('./controller/landing')
+const studentRoutes = require('./controller/student')
+const labtechRoutes = require('./controller/labtech')
 
 /*  Importing of Routes From Controller Folder  */
 app.use('/', landingRoutes);

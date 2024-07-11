@@ -21,25 +21,20 @@
         <div class="section-container">
             <section class="edit-section">
                 <h2 class="edit-profile">Edit Your Profile</h2>
-                <form id="editImage" form action="/editImg" method="POST" enctype="multipart/form-data">
+                <form id="editForm" action="/user/editInfo" method="POST" enctype="multipart/form-data">
                     {{#each userData}}
                     <div class="image-container">
                         <!-- Display user image -->
                         <img src='../images/{{this.image}}' alt="Round Image" class="round-image" id="preview">
-                        <input type="file" id="imageUpload" class="edit-button" accept="image/*"></button>
-                        <button type="save" class="edit-button" id="saveButton">Save Photo</button>
+                        <input type="file" id="imageUpload" name="imageUpload" class="edit-button" accept="image/*">
                     </div>
-                    {{/each}}
-                </form>
 
-                <form id="editForm" form action="/editInfo" method="POST">
-                    {{#each userData}}
                     <label for="id">DLSU ID:</label>
-                    <input type="text" id="id" name="id" value= '{{this.userID}}' readonly>
+                    <input type="text" id="id" name="id" value='{{this.userID}}' readonly>
 
                     <!-- Email input field -->
                     <label for="email">DLSU Email:</label>
-                    <input type="text" id="email" name="email" value= '{{this.email}}' readonly>
+                    <input type="text" id="email" name="email" value='{{this.email}}' readonly>
 
                     <!-- FirstName input field -->
                     <label for="firstName">First Name:</label>
@@ -55,7 +50,7 @@
                     {{/each}}
 
                     <!-- Submit button to save changes -->
-                    <button type="save" class="edit-button" id="saveButton">Save</button>
+                    <button type="submit" class="edit-button" id="saveButton">Save</button>
                 </form>
             </section>
         </div>

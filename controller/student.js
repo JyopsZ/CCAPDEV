@@ -107,65 +107,89 @@ router.post('/editInfo', async (req, res) => {
         const userId = req.session.user.userID;
         const user = await UserModel.findOne({ userID: userId });
 
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
         // Update the user's information
         user.firstName = firstName;
         user.lastName = lastName;
         user.password = password;
 
+        if (req.files && req.files.imageUpload) {
+            const imageFile = req.files.imageUpload;
+            const uploadPath = path.join(__dirname, '../public/images', `${Date.now()}-${imageFile.name}`);
+
+            // Move the file to the desired location
+            imageFile.mv(uploadPath, (err) => {
+                if (err) {
+                    console.error('Error uploading file:', err);
+                    return res.status(500).send('Internal Server Error');
+                }
+            });
+
+            user.image = path.basename(uploadPath); // Store the filename of the uploaded image
+        }
+
         // Save the updated user to the database
         await user.save();
 
-		// Update the session data with the new user information
+        // Update the session data with the new user information
         req.session.user = {
             userID: user.userID,
             firstName: user.firstName,
             lastName: user.lastName,
-			password: user.password
+            password: user.password,
+            image: user.image
         };
 
         res.redirect('/studentPage');
     } catch (err) {
-        console.error(err);
+        console.error('Error updating user information:', err);
         res.status(500).send('Internal Server Error');
     }
 });
 
+/*
 // Route to handle the image upload form submission
 router.post('/editImg', async (req, res) => {
     try {
+        if (!req.files || !req.files.imageUpload) {
+            return res.status(400).send('No files were uploaded.');
+        }   
+        else{
+            // Get the uploaded file
+            const uploadedFile = req.files.imageUpload;
 
-        // Get the uploaded file
-        const uploadedFile = req.files.imageUpload;
+            // Get the original filename
+            const filename = uploadedFile.name;
 
-        // Get the original filename
-        const filename = uploadedFile.name;
+            // Find the user by userID
+            const userId = req.session.user.userID;
+            const user = await UserModel.findOne({ userID: userId });
 
-        // Find the user by userID
-        const userId = req.session.user.userID;
-        const user = await UserModel.findOne({ userID: userId });
+            // Save the uploaded file to the ../public/images folder
+            const uploadPath = path.join(__dirname, '../public/images', filename);
+            await uploadedFile.mv(uploadPath);
 
-        // Save the uploaded file to the ../public/images folder
-        const uploadPath = path.join(__dirname, 'public/images', filename);
-        await uploadedFile.mv(uploadPath);
+            // Update the user's image property with the original filename
+            user.image = filename;
 
-        // Update the user's image property with the original filename
-        user.image = filename;
+            // Save the updated user to the database
+            await user.save();
 
-        // Save the updated user to the database
-        await user.save();
+            // Update session with the new image path
+            req.session.user.image = user.image;
 
-		req.session.user = {
-			
-			image: user.image
-		}
-
-        // Redirect or send a response
-        res.redirect('/studentPage');
+            // Redirect or send a response
+            res.redirect('/studentPage');
+        }
+        
     } catch (err) {
         console.error(err);
         res.status(500).send('Internal Server Error');
     }
-});
+});*/
 
 /* --------------------- SEARCH USERS for students ------------------------ */
 router.post("/findUser", async (req, res) => {
