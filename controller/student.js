@@ -258,10 +258,46 @@ router.post('/reservation', async (req, res) => {
 });
 
 /* --------------------- Edit Reservation for Students ------------------------ */
-router.get('/editReservation', function(req, res) {
-    const reservationID = 1005;
+router.get('/view-list-reservations', async (req, res) => {
+    const getSessionUID = req.session.user.userID;
+    const getUserID = await UserModel.findOne({ userID: getSessionUID });
+    const firstName = getUserID.firstName;
+    const lastName = getUserID.lastName;
+    const fullName = `${firstName} ${lastName}`;
+    const getReservations = await ReservationModel.find({ reserver: fullName });
+    res.render('view-list-reservations', { getReservations });
+});
 
-    res.render('editReservation', { reservationID: reservationID });
+router.get('/editReservation', async (req, res) => {
+    res.render('editReservation');
+});
+
+router.post('/editReservation', async (req, res) => {
+    const { reservId } = req.body;
+    const specificReserve = await ReservationModel.findOne({ reservationID: reservId });
+    console.log(specificReserve);
+    res.render('LEditReservation', {specificReserve});
+});
+
+router.post('/updateReservation', async (req, res) => {
+    const { reservationid, editlab, editdate } = req.body;
+    
+    // Check if there is an existing reservation with the same lab and date
+    const existingReservation = await ReservationModel.findOne({ labName: editlab, date: editdate });
+    
+    if (existingReservation) {
+        // If there is a clash, inform the user
+        return res.render('LEditReservation', {specificReserve: await ReservationModel.findOne({ reservationID: reservationid }), error: 'The selected date and lab are already reserved.'});
+    }
+    
+    // If no clash, proceed to update the reservation
+    const specificReserve = await ReservationModel.findOneAndUpdate(
+        { reservationID: reservationid },
+        { labName: editlab, date: editdate }
+    );
+
+    console.log(specificReserve);
+    res.render('LEditReservation', {specificReserve, success: 'Reservation updated successfully.'});
 });
 
 

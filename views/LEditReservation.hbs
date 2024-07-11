@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -6,11 +7,12 @@
     <title>Edit Reservation</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body>
     <!-- Header section containing the title and navigation menu -->
     <header>
         <img src="../images/logo.png" id="logo">
-        <h1>Edit Reservation </h1>
+        <h1>Edit Reservation</h1>
         <nav>
             <ul>
                 <li><a href="LSubReservation">Back</a></li>
@@ -22,23 +24,32 @@
     <!-- Main content section for editing reservations -->
     <main>
         <section class="edit-reservation">
+            <!-- Display error message if any -->
+            {{#if error}}
+                <p style="color: red;">{{error}}</p>
+            {{/if}}
+            
+            <!-- Display success message if any -->
+            {{#if success}}
+                <p style="color: green;">{{success}}</p>
+            {{/if}}
             <h2>Edit Your Reservation</h2>
-            <form id="edit-reserveForm">
+            <form id="edit-reserveForm" action="/updateReservation" method="POST">
                 <!-- Reservation ID input to fetch and edit specific reservation -->
                 <label for="reservation-id">Reservation ID:</label>
-                <input type="text" id="reservation-id" name="reservation-id" required>
-                
+                <input type="text" id="reservationid" name="reservationid" value="{{specificReserve.reservationID}}" readonly>
+
                 <!-- Laboratory selection dropdown -->
-                <label for="edit-lab">Select Laboratory:</label>
-                <select id="edit-lab" name="edit-lab" required>
-                    <option value="lab1">Lab Alpha</option>
-                    <option value="lab2">Lab Beta</option>
-                    <option value="lab3">Lab Charlie</option>
+                <label for="editlab">Select Laboratory:</label>
+                <select id="editlab" name="editlab" value="{{specificReserve.labName}}"required>
+                    <option value="lab1" >Lab 1</option>
+                    <option value="lab2" >Lab 2</option>
+                    <option value="lab3" >Lab 3</option>
                 </select>
 
                 <!-- Date input for selecting the new date -->
-                <label for="edit-date">Select New Date:</label>
-                <input type="date" id="edit-date" name="edit-date" required>
+                <label for="editdate">Select New Date:</label>
+                <input type="date" id="editdate" name="editdate" value="{{specificReserve.date}}" required>
 
                 <!-- Submit button to update the reservation -->
                 <button type="submit">Update Reservation</button>
@@ -50,24 +61,7 @@
     <footer>
         <p>&copy; 2024 LabLink. All rights reserved.</p>
     </footer>
-
-    <script>
-
-        document.addEventListener('DOMContentLoaded', function () {
-            
-            const editReserve = document.getElementById('edit-reserveForm');
-
-            editReserve.addEventListener('submit', function (event) {
-
-                event.preventDefault();
-
-                const lab = document.getElementById('edit-lab').value;
-                const date = document.getElementById('edit-date').value;
-
-                const url = `LReserveslot?lab=${encodeURIComponent(lab)}`;
-                window.location.href = url;
-            });
-        });
-    </script>
 </body>
+
 </html>
+
