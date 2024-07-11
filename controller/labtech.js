@@ -419,4 +419,31 @@ router.get('/viewSeatsLab', async (req, res) => {
     }
 });
 
+/* --------------------- Delete Reservation ------------------------ */
+router.get('/LRemoveReservation', async (req, res) => {
+    try {
+        const getReservations = await ReservationModel.find({});
+        res.render('LRemoveReservation', { getReservations });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching reservations');
+    }
+});
+
+router.delete('/removeReservation/:id', async (req, res) => {
+    try {
+        const reservationId = req.params.id;
+        const result = await ReservationModel.findOneAndDelete({ reservationID: reservationId });
+        
+        if (result) {
+            res.json({ success: true, message: 'Reservation removed successfully' });
+        } else {
+            res.status(404).json({ success: false, message: 'Reservation not found' });
+        }
+    } catch (error) {
+        console.error('Error removing reservation:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+});
+
 module.exports = router;
