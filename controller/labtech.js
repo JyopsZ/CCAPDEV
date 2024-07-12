@@ -423,7 +423,22 @@ router.get('/viewSeatsLab', async (req, res) => {
 router.get('/LRemoveReservation', async (req, res) => {
     try {
         const getReservations = await ReservationModel.find({});
-        res.render('LRemoveReservation', { getReservations });
+
+        const formattedReservations = getReservations.map(reservation => {
+            let labName = reservation.labName;
+            if (labName === "lab1") labName = "Lab Alpha";
+            else if (labName === "lab2") labName = "Lab Beta";
+            else if (labName === "lab3") labName = "Lab Charlie";
+
+            let time = reservation.time;
+            if (time === "nine") time = "9:00 - 9:30 AM";
+            else if (time === "nineThirty") time = "9:30 - 10:00 AM";
+            else if (time === "ten") time = "10:00 - 10:30 AM";
+
+            return { ...reservation.toObject(), labName, time };
+        });
+
+        res.render('LRemoveReservation', { getReservations: formattedReservations });
     } catch (error) {
         console.error(error);
         res.status(500).send('Error fetching reservations');

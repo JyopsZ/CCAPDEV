@@ -283,18 +283,28 @@ router.post('/reservation', async (req, res) => {
 
 /* --------------------- Edit Reservation for Students ------------------------ */
 router.get('/view-list-reservations', async (req, res) => {
-    
-    /*
     const getSessionUID = req.session.user.userID;
     const getUserID = await UserModel.findOne({ userID: getSessionUID });
     const firstName = getUserID.firstName;
     const lastName = getUserID.lastName;
     const fullName = `${firstName} ${lastName}`;
     const getReservations = await ReservationModel.find({ reserver: fullName });
-    res.render('view-list-reservations', { getReservations });
-    */
-    const allReservations = await ReservationModel.find({});
-    res.render('view-list-reservations', { getReservations: allReservations });
+
+    const formattedReservations = getReservations.map(reservation => {
+        let labName = reservation.labName;
+        if (labName === "lab1") labName = "Lab Alpha";
+        else if (labName === "lab2") labName = "Lab Beta";
+        else if (labName === "lab3") labName = "Lab Charlie";
+
+        let time = reservation.time;
+        if (time === "nine") time = "9:00 - 9:30 AM";
+        else if (time === "nineThirty") time = "9:30 - 10:00 AM";
+        else if (time === "ten") time = "10:00 - 10:30 AM";
+
+        return { ...reservation.toObject(), labName, time };
+    });
+
+    res.render('view-list-reservations', { getReservations: formattedReservations });
 });
 
 router.get('/editReservation', async (req, res) => {
