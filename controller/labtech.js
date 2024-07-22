@@ -6,92 +6,98 @@ const UserModel = require('../model/user');
 const ReservationModel = require('../model/reservation');
 
 /**************************************** LAB TECHNICIAN ********************************************/
+function isAuthenticated(req, res, next) {
+    if (req.session.user) {
+      return next();
+    }
+    res.redirect('/login'); // Redirect to login page if not authenticated
+  }
 
 // Lab Tech main page
-router.get('/labtechView/labtechPage', function(req, res) {
+router.get('/labtechView/labtechPage',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/labtechPage.html"));
 });
 
-router.get('/labtechView/LViewAvailability', function(req, res) {
+router.get('/labtechView/LViewAvailability',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LViewAvailability.html"));
 });
 
-router.get('/labtechView/LSubReservation', function(req, res) {
+router.get('/labtechView/LSubReservation',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LSubReservation.html"));
 });
 
-router.get('/labtechView/LSubProfile', function(req, res) {
+router.get('/labtechView/LSubProfile',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LSubProfile.html"));
 });
 
 
 // Lab Tech viewAvailability
-router.get('/labtechView/LReserveslot', function(req, res) {
+router.get('/labtechView/LReserveslot',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LReserveslot.html"));
 });
 
 
 // Lab Tech LSubReservation
-router.get('/labtechView/LReservation', function(req, res) {
+router.get('/labtechView/LReservation',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LReservation.html"));
 });
 
-router.get('/labtechView/LEditReservation', function(req, res) {
+router.get('/labtechView/LEditReservation',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LEditReservation.html"));
 });
 
-router.get('/labtechView/LRemoveReservationlist', function(req, res) {
+router.get('/labtechView/LRemoveReservationlist',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LRemoveReservationlist.html"));
 });
 
 
 // Lab Tech LReservation
-router.get('/labtechView/LRemoveReservationlist', function(req, res) {
+router.get('/labtechView/LRemoveReservationlist',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LRemoveReservationlist.html"));
 });
 
-router.get('/labtechView/lab1', function(req, res) {
+router.get('/labtechView/lab1',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/lab1.html"));
 });
 
-router.get('/labtechView/lab2', function(req, res) {
+router.get('/labtechView/lab2',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/lab2.html"));
 });
 
-router.get('/labtechView/lab3', function(req, res) {
+router.get('/labtechView/lab3',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/lab3.html"));
 });
 
 
 // Lab Tech LSubProfile
-router.get('/labtechView/searchEditProfile', function(req, res) {
+router.get('/labtechView/searchEditProfile',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/searchEditProfile.html"));
 });
 
-router.get('/labtechView/LsearchOtherProfile', function(req, res) {
+router.get('/labtechView/LsearchOtherProfile',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LsearchOtherProfile.html"));
 });
 
 
 // Lab Tech LViewEditProfile
-router.get('/labtechView/LsearchEditProfile', function(req, res) {
+router.get('/labtechView/LsearchEditProfile',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LsearchEditProfile.html"));
 });
 
-router.get('/labtechView/LViewOtherProfile', function(req, res) {
+router.get('/labtechView/LViewOtherProfile',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LViewOtherProfile.html"));
 });
 
 
 // Labtech Page
-router.get("/labtechPage", (req, res) => {
+router.get("/labtechPage",isAuthenticated, (req, res) => {
     // Retrieve user data from the session
     const user = req.session.user;
     console.log(user);
     res.render('labtechPage',{user});
 });
 
-router.get('/LViewEditProfile' , async (req, res) => {
+router.get('/LViewEditProfile' ,isAuthenticated, async (req, res) => {
 	const userId = req.session.user.userID;
     const userData = await UserModel.find({ userID:userId }) // select * from Post where userID == userData.userID
     console.log(userData)
@@ -100,7 +106,7 @@ router.get('/LViewEditProfile' , async (req, res) => {
 
 // editing of user profile with picture
 // Handling of form data to database
-router.post('/editUserProfileWithImage', async (req, res) => {
+router.post('/editUserProfileWithImage',isAuthenticated, async (req, res) => {
     try {
         const { userId, firstName, lastName, password } = req.body; // Include userId in the request body
 
@@ -142,7 +148,7 @@ router.post('/editUserProfileWithImage', async (req, res) => {
 });
 
 // Handling of form data to database
-router.post('/editInfolabtech', async (req, res) => {
+router.post('/editInfolabtech',isAuthenticated, async (req, res) => {
     try {
         const { id, firstName, lastName, password } = req.body;
 
@@ -166,7 +172,7 @@ router.post('/editInfolabtech', async (req, res) => {
 });
 
 // Route to handle the image upload form submission
-router.post('/editImgLabtech', async (req, res) => {
+router.post('/editImgLabtech',isAuthenticated, async (req, res) => {
     try {
 
         // Get the uploaded file
@@ -203,7 +209,7 @@ router.post('/editImgLabtech', async (req, res) => {
 });
 
 /* --------------------- EDIT USERS for labtechs ------------------------ */
-router.post("/findUser2", async (req, res) => {
+router.post("/findUser2",isAuthenticated, async (req, res) => {
     try {
         const { userName } = req.body;
         const lowerCaseName = userName.toLowerCase();
@@ -240,7 +246,7 @@ router.post("/findUser2", async (req, res) => {
 });
 
 /* --------------------- SEARCH USERS for labtechs ------------------------ */
-router.post("/viewUserLab", async (req, res) => {
+router.post("/viewUserLab",isAuthenticated, async (req, res) => {
 
     try {
         const { userName } = req.body;
@@ -281,12 +287,12 @@ router.post("/viewUserLab", async (req, res) => {
 });
 
 /* --------------------- RESERVATION for a student (labtech side) ------------------------ */
-router.get('/LReservation', function(req, res) {
+router.get('/LReservation',isAuthenticated, function(req, res) {
     res.render('LReservation');
 });
 
 // Route to fetch reservations
-router.get('/LReservations', async (req, res) => {
+router.get('/LReservations',isAuthenticated, async (req, res) => {
     const { labName, date, time } = req.query;
     try {
         const LReservations = await ReservationModel.find({ labName, date, time });
@@ -298,7 +304,7 @@ router.get('/LReservations', async (req, res) => {
 });
 
 // Route to create a new reservation
-router.post('/LReservation', async (req, res) => {
+router.post('/LReservation',isAuthenticated, async (req, res) => {
     const { labName, seatRow, seatCol, date, time, reserver } = req.body;
     const seatPos = [parseInt(seatRow), parseInt(seatCol)];
     const reservationID = Math.floor(Math.random() * 10000); // Generate a random reservation ID
@@ -328,18 +334,18 @@ router.post('/LReservation', async (req, res) => {
 });
 
 /* --------------------- Edit Reservation for Students ------------------------ */
-router.get('/LEditReservation', async (req, res) => {
+router.get('/LEditReservation',isAuthenticated, async (req, res) => {
     res.render('LEditReservation');
 });
 
-router.post('/LEditReservation', async (req, res) => {
+router.post('/LEditReservation',isAuthenticated, async (req, res) => {
     const { reservId } = req.body;
     const specificReserve = await ReservationModel.findOne({ reservationID: reservId });
     console.log(specificReserve);
     res.render('LEditReservation2', {specificReserve});
 });
 
-router.post('/updateReservationLab', async (req, res) => {
+router.post('/updateReservationLab',isAuthenticated, async (req, res) => {
     const { reservationid, editlab, editdate, edittime, editSeat } = req.body;
 
     const seatPos = editSeat.split(',').map(Number);
@@ -363,7 +369,7 @@ router.post('/updateReservationLab', async (req, res) => {
 });
 
 /* --------------------- Display User Profile from Tooltip Press ------------------------ */
-router.post("/tooltipLab", async (req, res) => {
+router.post("/tooltipLab",isAuthenticated, async (req, res) => {
     try {
         const { userName } = req.body;
         const lowerCaseName = userName.toLowerCase();
@@ -402,13 +408,13 @@ router.post("/tooltipLab", async (req, res) => {
 });
 
 /* --------------------- Lab Technician Check Seat Availability ------------------------ */
-router.get('/LViewAvailable', function(req, res) {
+router.get('/LViewAvailable',isAuthenticated, function(req, res) {
     const user = req.session.user;
     res.render('LViewAvailable');
 });
 
 // Route to fetch reservations
-router.get('/viewSeatsLab', async (req, res) => {
+router.get('/viewSeatsLab',isAuthenticated, async (req, res) => {
     const { labName, date, time } = req.query;
     try {
         const viewSeatsLab = await ReservationModel.find({ labName, date, time });
@@ -420,7 +426,7 @@ router.get('/viewSeatsLab', async (req, res) => {
 });
 
 /* --------------------- Delete Reservation ------------------------ */
-router.get('/LRemoveReservation', async (req, res) => {
+router.get('/LRemoveReservation',isAuthenticated, async (req, res) => {
     try {
         const getReservations = await ReservationModel.find({});
 
@@ -445,7 +451,7 @@ router.get('/LRemoveReservation', async (req, res) => {
     }
 });
 
-router.delete('/removeReservation/:id', async (req, res) => {
+router.delete('/removeReservation/:id',isAuthenticated, async (req, res) => {
     try {
         const reservationId = req.params.id;
         const result = await ReservationModel.findOneAndDelete({ reservationID: reservationId });

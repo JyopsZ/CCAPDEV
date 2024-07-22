@@ -5,59 +5,66 @@ var path = require('path');
 const UserModel = require('../model/user');
 const ReservationModel = require('../model/reservation');
 
+function isAuthenticated(req, res, next) {
+    if (req.session.user) {
+      return next();
+    }
+    res.redirect('/login'); // Redirect to login page if not authenticated
+  }
+  
 //Student studentPage
-router.get('/studentView/studentPage', function(req, res) {
+router.get('/studentView/studentPage', isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/studentPage.html"));
 });
 
-router.get('/studentView/view-availability', function(req, res) {
+router.get('/studentView/view-availability',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/view-availability.html"));
 });
 
-router.get('/studentView/subReservation', function(req, res) {
+router.get('/studentView/subReservation',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/subReservation.html"));
 });
 
-router.get('/studentView/subProfile', function(req, res) {
+router.get('/studentView/subProfile',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/subProfile.html"));
 });
 
 
 //Student subReservation
-router.get('/studentView/reservation', function(req, res) {
+router.get('/studentView/reservation',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/reservation.html"));
 });
 
-router.get('/studentView/view-list-reservations', function(req, res) {
+router.get('/studentView/view-list-reservations',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/view-list-reservations.html"));
 });
 
-router.get('/studentView/edit-reservation', function(req, res) {
+router.get('/studentView/edit-reservation',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/edit-reservation.html"));
 });
 
 
 // Student reservation
-router.get('/studentView/reserveslot', function(req, res) {
+router.get('/studentView/reserveslot',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/reserveslot.html"));
 });
 
 
 // Student reserveslot
-router.get('/studentView/lab1', function(req, res) {
+router.get('/studentView/lab1',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/lab1.html"));
 });
 
-router.get('/studentView/lab2', function(req, res) {
+router.get('/studentView/lab2',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/lab2.html"));
 });
 
-router.get('/studentView/lab3', function(req, res) {
+router.get('/studentView/lab3',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/lab3.html"));
 });
 
 // Student Page
-router.get("/studentPage", (req, res) => {
+router.get("/studentPage",isAuthenticated, (req, res) => {
     // Retrieve user data from the session
     const user = req.session.user;
     console.log(user);
@@ -75,31 +82,31 @@ router.get('/studentView/ViewEditProfile' , async (req, res) => {
 });
 */ 
 
-router.get('/studentView/searchOtherProfile', function(req, res) {
+router.get('/studentView/searchOtherProfile',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/searchOtherProfile.html"));
 });
 
-router.get('/studentView/DeleteProfile', function(req, res) {
+router.get('/studentView/DeleteProfile',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/DeleteProfile.html"));
 });
 
 // Student serchOtherProfile
-router.get('/studentView/ViewOtherProfile', function(req, res) {
+router.get('/studentView/ViewOtherProfile',isAuthenticated, function(req, res) {
 	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/ViewOtherProfile.html"));
 });
 
 
 // Student ViewEdit Handlebar
 // Route for Handlebar
-router.get('/ViewEditProfile' , async (req, res) => {
-	const userId = req.session.user.userID;
+router.get('/ViewEditProfile' ,isAuthenticated, async (req, res) => {
+    const userId = req.session.user.userID;
     const userData = await UserModel.find({ userID:userId }) // select * from Post where userID == userData.userID
     console.log(userData)
     res.render('ViewEditProfile',{userData})
 });
 
 // Handling of form data to database
-router.post('/editInfo', async (req, res) => {
+router.post('/editInfo',isAuthenticated, async (req, res) => {
     try {
         const { firstName, lastName, password } = req.body;
 
@@ -192,7 +199,7 @@ router.post('/editImg', async (req, res) => {
 });*/
 
 /* --------------------- SEARCH USERS for students ------------------------ */
-router.post("/findUser", async (req, res) => {
+router.post("/findUser",isAuthenticated, async (req, res) => {
     try {
         const { userName } = req.body;
         const lowerCaseName = userName.toLowerCase();
@@ -231,7 +238,7 @@ router.post("/findUser", async (req, res) => {
 });
 
 /* --------------------- Student RESERVATION ------------------------ */
-router.get('/reservation', function(req, res) {
+router.get('/reservation',isAuthenticated, function(req, res) {
     const user = req.session.user;
     res.render('reservation', {
         firstName: user.firstName,
@@ -240,7 +247,7 @@ router.get('/reservation', function(req, res) {
 });
 
 // Route to fetch reservations
-router.get('/reservations', async (req, res) => {
+router.get('/reservations',isAuthenticated, async (req, res) => {
     const { labName, date, time } = req.query;
     try {
         const reservations = await ReservationModel.find({ labName, date, time });
@@ -252,7 +259,7 @@ router.get('/reservations', async (req, res) => {
 });
 
 // Route to create a new reservation
-router.post('/reservation', async (req, res) => {
+router.post('/reservation',isAuthenticated, async (req, res) => {
     const { labName, seatRow, seatCol, date, time, reserver } = req.body;
     const seatPos = [parseInt(seatRow), parseInt(seatCol)];
     const reservationID = Math.floor(Math.random() * 10000); // Generate a random reservation ID
@@ -282,7 +289,7 @@ router.post('/reservation', async (req, res) => {
 });
 
 /* --------------------- Edit Reservation for Students ------------------------ */
-router.get('/view-list-reservations', async (req, res) => {
+router.get('/view-list-reservations',isAuthenticated, async (req, res) => {
     const getSessionUID = req.session.user.userID;
     const getUserID = await UserModel.findOne({ userID: getSessionUID });
     const firstName = getUserID.firstName;
@@ -307,18 +314,18 @@ router.get('/view-list-reservations', async (req, res) => {
     res.render('view-list-reservations', { getReservations: formattedReservations });
 });
 
-router.get('/editReservation', async (req, res) => {
+router.get('/editReservation',isAuthenticated, async (req, res) => {
     res.render('editReservation');
 });
 
-router.post('/editReservation', async (req, res) => {
+router.post('/editReservation',isAuthenticated, async (req, res) => {
     const { reservId } = req.body;
     const specificReserve = await ReservationModel.findOne({ reservationID: reservId });
     console.log(specificReserve);
     res.render('EditReservation2', {specificReserve});
 });
 
-router.post('/updateReservation', async (req, res) => {
+router.post('/updateReservation',isAuthenticated, async (req, res) => {
     const { reservationid, editlab, editdate, edittime, editSeat } = req.body;
 
     const seatPos = editSeat.split(',').map(Number);
@@ -343,7 +350,7 @@ router.post('/updateReservation', async (req, res) => {
 
 
 /* --------------------- Delete own Profile for Students ------------------------ */
-router.post('/deleteUser', async (req, res) => {
+router.post('/deleteUser',isAuthenticated, async (req, res) => {
     try {
         const userId = req.session.user.userID;
         await UserModel.deleteOne({ userID: userId });
@@ -356,7 +363,7 @@ router.post('/deleteUser', async (req, res) => {
 });
 
 /* --------------------- Display User Profile from Tooltip Press ------------------------ */
-router.post("/tooltip", async (req, res) => {
+router.post("/tooltip",isAuthenticated, async (req, res) => {
     try {
         const { userName } = req.body;
         const lowerCaseName = userName.toLowerCase();
@@ -396,7 +403,7 @@ router.post("/tooltip", async (req, res) => {
 
 
 /* --------------------- Student Check Seat Availability ------------------------ */
-router.get('/viewAvailable', function(req, res) {
+router.get('/viewAvailable',isAuthenticated, function(req, res) {
     const user = req.session.user;
     res.render('viewAvailable');
 });

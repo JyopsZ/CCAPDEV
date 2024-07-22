@@ -86,10 +86,17 @@ router.post('/register', async (req, res) => {
 module.exports = router;
 
 router.get("/logout", (req, res) => {
-    // Destroy the session and redirect to the login page
-    req.session.destroy(() => {
-        res.clearCookie("sessionId");
-        res.redirect("/");
+    // Destroy the session
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).send("Could not log out.");
+        }
+
+        // Clear the cookie (ensure the cookie name matches the one used)
+        res.clearCookie("connect.sid", { path: '/' }); // Assuming default cookie name is 'connect.sid'
+
+        // Redirect to the login page
+        res.redirect("/login");
     });
 });
 
