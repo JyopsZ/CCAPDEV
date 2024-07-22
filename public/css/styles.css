@@ -317,3 +317,37 @@ footer {
 .user-card p {
     margin: 8px 0;
 }
+
+/* Styling for about container and cards */
+.about-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.about-card {
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    padding: 20px;
+    width: calc(33% - 60px);
+    box-sizing: border-box;
+}
+
+.about-card h3 {
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+    .about-card {
+        width: calc(50% - 40px);
+    }
+}
+
+@media (max-width: 480px) {
+    .about-card {
+        width: calc(100% - 40px);
+    }
+}
