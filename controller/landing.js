@@ -1,4 +1,5 @@
 var express = require('express');
+const bcrypt = require('bcrypt');
 var router = express.Router();
 var path = require('path');
 const User = require('../model/user');
@@ -21,22 +22,23 @@ router.post('/login', async (req, res) => {
             return res.status(404).redirect('/login?error=User not found. Please register.');
         }
 
-        // Check if passwords match (insecure for production)
-        if (user.password !== password) {
+        // Compare the hashed password with the plain text password
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
             return res.status(401).redirect('/login?error=Invalid credentials');
         }
 
         // Store user data in session
-        //req.session.userID = user.userID; // Store user in session
         req.session.user = user;
 
         // Redirect based on user role
         switch (user.role) {
             case 'student':
-                res.render('studentPage', {user}); // Redirect to student dashboard or main page
+                res.render('studentPage', { user }); // Redirect to student dashboard or main page
                 break;
             case 'labtech':
-                res.render('labtechPage', {user}); // Redirect to lab technician dashboard or main page
+                res.render('labtechPage', { user }); // Redirect to lab technician dashboard or main page
                 break;
             default:
                 res.status(403).send('Unauthorized access');
@@ -61,11 +63,15 @@ router.post('/register', async (req, res) => {
             return res.status(400).send('Email already exists');
         }
 
+        // Hash the password
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
         const newUser = new User({
             firstName,
             lastName,
             email,
-            password,
+            password: hashedPassword,
             role
         });
 
@@ -76,6 +82,8 @@ router.post('/register', async (req, res) => {
         res.status(500).redirect('/register');
     }
 });
+
+module.exports = router;
 
 router.get("/logout", (req, res) => {
     // Destroy the session and redirect to the login page
