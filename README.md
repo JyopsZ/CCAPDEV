@@ -13,26 +13,23 @@ This web application allows users to reserve slots in a computer laboratory. Use
 - Search functionality for users and available slots
 - Role-based access for students and lab technicians
 
-## Import MongoDB Data
-- Connect to mongodb://localhost:27017
-- Under the test database, import the following data from the provided JSON files in the importData folder:
-	- test.users.json (to be imported in the users collection)
-	- test.reservations.json (to be imported in the reservations collection)
-
 ## How to run the project:
-- in CMD/ Windows Powershell, change directory to folder of project
-- Commands: 
+-in CMD/ Windows Powershell, change directory to folder of project
+-Commands: 
 
-	- npm install express express-session cookie-parser hbs
-	- npm install express-fileupload
-	- npm install mongodb --save
-	- npm install mongoose
-	- npm install mongoose-sequence
-	- npm init -y
-	- node index.js
+	--npm install express express-session cookie-parser hbs
+	--npm install express-fileupload
+	--npm install mongodb --save
+	--npm install mongoose
+	--npm install mongoose-sequence
+	--npm install bcrypt
+	--npm install dotenv --save-dev
+	--npm init -y
+	--node index.js
 
-- open any web browser
-	- input URL -> localhost:3000
+-open any web browser
+
+	-input URL -> localhost:3000
 
 ## Technologies Used
 - **Frontend:**

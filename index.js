@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/')
+mongoose.connect('mongodb+srv://admin:1234@test.cx7f1zo.mongodb.net/?retryWrites=true&w=majority&appName=test')
 const multer = require('multer');
 const express = require('express')
 const bodyParser = require('body-parser')
