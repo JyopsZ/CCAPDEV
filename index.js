@@ -1,15 +1,24 @@
-const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://admin:1234@test.cx7f1zo.mongodb.net/?retryWrites=true&w=majority&appName=test')
 const multer = require('multer');
 const express = require('express')
 const bodyParser = require('body-parser')
 const session = require("express-session")
 const path = require('path')
 
+const { envPort, dbURL, sessionKey } = require("./config");
+
+const options = {
+    useNewUrlParser: true
+};
+
+const mongoose = require('mongoose')
+mongoose.connect(dbURL)
+
 // File Uploading
 const fileUpload = require('express-fileupload')
 
 const app = new express();
+
+const port = envPort || 3000;
 
 /* Initialize database collections */
 const Reservation = require("./model/reservation")
@@ -28,7 +37,7 @@ app.use(fileUpload());
 // Session middleware setup
 app.use(
     session({
-        secret: "secret-key",
+        secret: sessionKey,
         resave: false,
         saveUninitialized: false,
     })
@@ -56,6 +65,6 @@ app.use('/', labtechRoutes);
 var hbs = require('hbs')
 app.set('view engine','hbs');
 
-var server = app.listen(3000, function() {
+var server = app.listen(port, function() {
 	console.log("listening to port 3000...");
 });
