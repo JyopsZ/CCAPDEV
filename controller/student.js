@@ -1,6 +1,6 @@
 var express = require('express');
 const session = require("express-session");
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 var router = express.Router();
 var path = require('path');
 const UserModel = require('../model/user');
@@ -124,7 +124,7 @@ router.post('/editInfo',isAuthenticated, async (req, res) => {
         user.lastName = lastName;
 
         const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        const hashedPassword = await bcryptjs.hash(password, saltRounds);
         user.password = hashedPassword;
 
         if (req.files && req.files.imageUpload) {
