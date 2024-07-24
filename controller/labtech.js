@@ -1,5 +1,6 @@
 var express = require('express');
 const session = require("express-session");
+const bcrypt = require('bcrypt');
 var router = express.Router();
 var path = require('path');
 const UserModel = require('../model/user');
@@ -120,7 +121,10 @@ router.post('/editUserProfileWithImage',isAuthenticated, async (req, res) => {
         // Update the user's information
         user.firstName = firstName;
         user.lastName = lastName;
-        user.password = password;
+
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        user.password = hashedPassword;
 
         if (req.files && req.files.imageUpload) {
             const imageFile = req.files.imageUpload;
@@ -159,7 +163,10 @@ router.post('/editInfolabtech',isAuthenticated, async (req, res) => {
         // Update the user's information
         user.firstName = firstName;
         user.lastName = lastName;
-        user.password = password;
+
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        user.password = hashedPassword;
 
         // Save the updated user to the database
         await user.save();
