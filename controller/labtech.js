@@ -16,77 +16,88 @@ function isAuthenticated(req, res, next) {
 
 // Lab Tech main page
 router.get('/labtechView/labtechPage',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/labtechPage.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/labtechPage.html"));
+    res.sendFile(path.join(rootDir, 'public', 'labtechView', 'labtechPage.html'));
 });
 
 router.get('/labtechView/LViewAvailability',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LViewAvailability.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LViewAvailability.html"));
+    res.sendFile(path.join(rootDir, 'public', 'labtechView', 'LViewAvailability.html'));
 });
 
 router.get('/labtechView/LSubReservation',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LSubReservation.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LSubReservation.html"));
+    res.sendFile(path.join(rootDir, 'public', 'labtechView', 'LSubReservation.html'));
 });
 
 router.get('/labtechView/LSubProfile',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LSubProfile.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LSubProfile.html"));
+    res.sendFile(path.join(rootDir, 'public', 'labtechView', 'LSubProfile.html'));
 });
 
 
 // Lab Tech viewAvailability
 router.get('/labtechView/LReserveslot',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LReserveslot.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LReserveslot.html"));
+    res.sendFile(path.join(rootDir, 'public', 'labtechView', 'LReserveslot.html'));
 });
 
 
 // Lab Tech LSubReservation
 router.get('/labtechView/LReservation',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LReservation.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LReservation.html"));
+    res.sendFile(path.join(rootDir, 'public', 'labtechView', 'LReservation.html'));
 });
 
 router.get('/labtechView/LEditReservation',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LEditReservation.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LEditReservation.html"));
+    res.sendFile(path.join(rootDir, 'public', 'labtechView', 'LEditReservation.html'));
 });
 
 router.get('/labtechView/LRemoveReservationlist',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LRemoveReservationlist.html"));
+    res.sendFile(path.join(rootDir, 'public', 'labtechView', 'LRemoveReservationlist.html'));
 });
 
 
 // Lab Tech LReservation
-router.get('/labtechView/LRemoveReservationlist',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LRemoveReservationlist.html"));
-});
 
 router.get('/labtechView/lab1',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/lab1.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/lab1.html"));
+    res.sendFile(path.join(rootDir, 'public', 'labtechView', 'lab1.html'));
 });
 
 router.get('/labtechView/lab2',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/lab2.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/lab2.html"));
+    res.sendFile(path.join(rootDir, 'public', 'labtechView', 'lab2.html'));
 });
 
 router.get('/labtechView/lab3',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/lab3.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/lab3.html"));
+    res.sendFile(path.join(rootDir, 'public', 'labtechView', 'lab3.html'));
 });
 
 
 // Lab Tech LSubProfile
 router.get('/labtechView/searchEditProfile',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/searchEditProfile.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/searchEditProfile.html"));
+    res.sendFile(path.join(rootDir, 'public', 'labtechView', 'searchEditProfile.html'));
 });
 
 router.get('/labtechView/LsearchOtherProfile',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LsearchOtherProfile.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LsearchOtherProfile.html"));
+    res.sendFile(path.join(rootDir, 'public', 'labtechView', 'LsearchOtherProfile.html'));
 });
 
 
 // Lab Tech LViewEditProfile
 router.get('/labtechView/LsearchEditProfile',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LsearchEditProfile.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LsearchEditProfile.html"));
+    res.sendFile(path.join(rootDir, 'public', 'labtechView', 'LsearchEditProfile.html'));
 });
 
 router.get('/labtechView/LViewOtherProfile',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LViewOtherProfile.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/labtechView/LViewOtherProfile.html"));
+    res.sendFile(path.join(rootDir, 'public', 'labtechView', 'LViewOtherProfile.html'));
 });
 
 
@@ -128,7 +139,7 @@ router.post('/editUserProfileWithImage',isAuthenticated, async (req, res) => {
 
         if (req.files && req.files.imageUpload) {
             const imageFile = req.files.imageUpload;
-            const uploadPath = path.join(__dirname, '../public/images', `${Date.now()}-${imageFile.name}`);
+            const uploadPath = path.join(rootDir, 'public', 'images', `${Date.now()}-${imageFile.name}`);
 
             // Move the file to the desired location
             imageFile.mv(uploadPath, (err) => {
