@@ -6,6 +6,8 @@ var path = require('path');
 const UserModel = require('../model/user');
 const ReservationModel = require('../model/reservation');
 
+const rootDir = path.join(__dirname, '..');
+
 /**************************************** LAB TECHNICIAN ********************************************/
 function isAuthenticated(req, res, next) {
     if (req.session.user) {
