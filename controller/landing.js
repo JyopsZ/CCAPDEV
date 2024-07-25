@@ -100,4 +100,8 @@ router.get("/logout", (req, res) => {
     });
 });
 
+router.get('/AboutMe', function(req, res) {
+	res.sendFile(path.join(__dirname + "\\" + "../public/AboutMe.html"));
+});
+
 module.exports = router;
