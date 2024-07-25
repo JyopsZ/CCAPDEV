@@ -4,12 +4,16 @@ var router = express.Router();
 var path = require('path');
 const User = require('../model/user');
 
+const rootDir = path.join(__dirname, '..');
+
 router.get('/index', function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/index.html"));
+    res.sendFile(path.join(rootDir, 'public', 'index.html'));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/index.html"));
 });
 
 router.get('/login', function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/login.html"));
+    res.sendFile(path.join(rootDir, 'public', 'login.html'));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/login.html"));
 });
 
 router.post('/login', async (req, res) => {
@@ -50,7 +54,8 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/register', function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/register.html"));
+    res.sendFile(path.join(rootDir, 'public', 'register.html'));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/register.html"));
 });
 
 router.post('/register', async (req, res) => {
@@ -101,7 +106,8 @@ router.get("/logout", (req, res) => {
 });
 
 router.get('/AboutMe', function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/AboutMe.html"));
+    res.sendFile(path.join(rootDir, 'public', 'AboutMe.html'));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/AboutMe.html"));
 });
 
 
