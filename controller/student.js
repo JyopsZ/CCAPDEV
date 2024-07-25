@@ -6,6 +6,8 @@ var path = require('path');
 const UserModel = require('../model/user');
 const ReservationModel = require('../model/reservation');
 
+const rootDir = path.join(__dirname, '..');
+
 function isAuthenticated(req, res, next) {
     if (req.session.user) {
       return next();
@@ -15,53 +17,64 @@ function isAuthenticated(req, res, next) {
   
 //Student studentPage
 router.get('/studentView/studentPage', isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/studentPage.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/studentView/studentPage.html"));
+    res.sendFile(path.join(rootDir, 'public', 'studentView', 'studentPage.html'));
 });
 
 router.get('/studentView/view-availability',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/view-availability.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/studentView/view-availability.html"));
+    res.sendFile(path.join(rootDir, 'public', 'studentView', 'view-availability.html'));
 });
 
 router.get('/studentView/subReservation',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/subReservation.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/studentView/subReservation.html"));
+    res.sendFile(path.join(rootDir, 'public', 'studentView', 'subReservation.html'));
 });
 
 router.get('/studentView/subProfile',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/subProfile.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/studentView/subProfile.html"));
+    res.sendFile(path.join(rootDir, 'public', 'studentView', 'subProfile.html'));
 });
 
 
 //Student subReservation
 router.get('/studentView/reservation',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/reservation.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/studentView/reservation.html"));
+    res.sendFile(path.join(rootDir, 'public', 'studentView', 'reservation.html'));
 });
 
 router.get('/studentView/view-list-reservations',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/view-list-reservations.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/studentView/view-list-reservations.html"));
+    res.sendFile(path.join(rootDir, 'public', 'studentView', 'view-list-reservations.html'));
 });
 
 router.get('/studentView/edit-reservation',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/edit-reservation.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/studentView/edit-reservation.html"));
+    res.sendFile(path.join(rootDir, 'public', 'studentView', 'edit-reservation.html'));
 });
 
 
 // Student reservation
 router.get('/studentView/reserveslot',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/reserveslot.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/studentView/reserveslot.html"));
+    res.sendFile(path.join(rootDir, 'public', 'studentView', 'reserveslot.html'));
 });
 
 
 // Student reserveslot
 router.get('/studentView/lab1',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/lab1.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/studentView/lab1.html"));
+    res.sendFile(path.join(rootDir, 'public', 'studentView', 'lab1.html'));
 });
 
 router.get('/studentView/lab2',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/lab2.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/studentView/lab2.html"));
+    res.sendFile(path.join(rootDir, 'public', 'studentView', 'lab2.html'));
 });
 
 router.get('/studentView/lab3',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/lab3.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/studentView/lab3.html"));
+    res.sendFile(path.join(rootDir, 'public', 'studentView', 'lab3.html'));
 });
 
 // Student Page
@@ -84,16 +97,19 @@ router.get('/studentView/ViewEditProfile' , async (req, res) => {
 */ 
 
 router.get('/studentView/searchOtherProfile',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/searchOtherProfile.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/studentView/searchOtherProfile.html"));
+    res.sendFile(path.join(rootDir, 'public', 'studentView', 'searchOtherProfile.html'));
 });
 
 router.get('/studentView/DeleteProfile',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/DeleteProfile.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/studentView/DeleteProfile.html"));
+    res.sendFile(path.join(rootDir, 'public', 'studentView', 'DeleteProfile.html'));
 });
 
 // Student serchOtherProfile
 router.get('/studentView/ViewOtherProfile',isAuthenticated, function(req, res) {
-	res.sendFile(path.join(__dirname + "\\" + "../public/studentView/ViewOtherProfile.html"));
+	//res.sendFile(path.join(__dirname + "\\" + "../public/studentView/ViewOtherProfile.html"));
+    res.sendFile(path.join(rootDir, 'public', 'studentView', 'ViewOtherProfile.html'));
 });
 
 
@@ -129,8 +145,9 @@ router.post('/editInfo',isAuthenticated, async (req, res) => {
 
         if (req.files && req.files.imageUpload) {
             const imageFile = req.files.imageUpload;
-            const uploadPath = path.join(__dirname, '../public/images', `${Date.now()}-${imageFile.name}`);
-
+            //const uploadPath = path.join(__dirname, '../public/images', `${Date.now()}-${imageFile.name}`);
+            const uploadPath = path.join(rootDir, 'public', 'images', `${Date.now()}-${imageFile.name}`);
+            
             // Move the file to the desired location
             imageFile.mv(uploadPath, (err) => {
                 if (err) {
