@@ -375,7 +375,7 @@ router.post('/updateReservationLab',isAuthenticated, async (req, res) => {
     
     if (existingReservation) {
         // If there is a clash, inform the user
-        return res.render('EditReservation2', {specificReserve: await ReservationModel.findOne({ reservationID: reservationid }), error: 'The selected date and lab are already reserved.'});
+        return res.render('LEditReservation2', {specificReserve: await ReservationModel.findOne({ reservationID: reservationid }), error: 'The selected date and lab are already reserved.'});
     }
     
     // If no clash, proceed to update the reservation
