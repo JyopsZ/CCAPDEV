@@ -362,7 +362,7 @@ router.post('/LEditReservation',isAuthenticated, async (req, res) => {
     const { reservId } = req.body;
     const specificReserve = await ReservationModel.findOne({ reservationID: reservId });
     console.log(specificReserve);
-    res.render('LEditReservation2', {specificReserve});
+    res.render('LEditREservation2', {specificReserve});
 });
 
 router.post('/updateReservationLab',isAuthenticated, async (req, res) => {
@@ -375,7 +375,7 @@ router.post('/updateReservationLab',isAuthenticated, async (req, res) => {
     
     if (existingReservation) {
         // If there is a clash, inform the user
-        return res.render('LEditReservation2', {specificReserve: await ReservationModel.findOne({ reservationID: reservationid }), error: 'The selected date and lab are already reserved.'});
+        return res.render('LEditREservation2', {specificReserve: await ReservationModel.findOne({ reservationID: reservationid }), error: 'The selected date and lab are already reserved.'});
     }
     
     // If no clash, proceed to update the reservation
@@ -385,7 +385,7 @@ router.post('/updateReservationLab',isAuthenticated, async (req, res) => {
     );
 
     console.log(specificReserve);
-    res.render('LEditReservation2', {specificReserve, success: 'Reservation updated successfully.'});
+    res.render('LEditREservation2', {specificReserve, success: 'Reservation updated successfully.'});
 });
 
 /* --------------------- Display User Profile from Tooltip Press ------------------------ */
