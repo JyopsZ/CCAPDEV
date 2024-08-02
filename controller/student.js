@@ -283,9 +283,7 @@ router.get('/reservations',isAuthenticated, async (req, res) => {
 router.post('/reservation',isAuthenticated, async (req, res) => {
     const { labName, seatRow, seatCol, date, time, reserver } = req.body;
     const seatPos = [parseInt(seatRow), parseInt(seatCol)];
-
-    const latestReservation = await ReservationModel.findOne().sort({ reservationID: -1 });
-    const reservationID = latestReservation ? latestReservation.reservationID + 1 : 1000;
+    const reservationID = Math.floor(Math.random() * 10000); // Generate a random reservation ID
 
     try {
         // Check if the seat is already taken
@@ -293,6 +291,12 @@ router.post('/reservation',isAuthenticated, async (req, res) => {
         if (existingReserve) {
             res.status(500).redirect('/reservation');
         }
+
+        const latestReservation = await ReservationModel.findOne({}, { reservationID: 1 })
+            .sort({ reservationID: -1 })
+            .exec();
+        
+        const reservationID = latestReservation ? latestReservation.reservationID + 1 : 1001;
 
         const newReserve = new ReservationModel({
             labName,
@@ -392,7 +396,6 @@ router.post('/deleteUser',isAuthenticated, async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-
 /* --------------------- Display User Profile from Tooltip Press ------------------------ */
 router.post("/tooltip",isAuthenticated, async (req, res) => {
     try {
