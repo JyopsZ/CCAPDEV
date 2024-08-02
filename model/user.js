@@ -12,9 +12,6 @@ const userSchema = new mongoose.Schema({
     userID: { type: Number, unique: true }
 });
 
-// Add the auto-increment plugin to the schema
-userSchema.plugin(AutoIncrement, { inc_field: 'userID', start_seq: 5013 });
-
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
