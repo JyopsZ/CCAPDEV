@@ -374,7 +374,15 @@ router.post('/updateReservation',isAuthenticated, async (req, res) => {
 router.post('/deleteUser',isAuthenticated, async (req, res) => {
     try {
         const userId = req.session.user.userID;
+        const user = await UserModel.findOne({ userID: userId });
+        const fullName = `${user.firstName} ${user.lastName}`;
+
+        // Delete the user
         await UserModel.deleteOne({ userID: userId });
+
+        // Delete associated reservations
+        await ReservationModel.deleteMany({ reserver: fullName });
+
         req.session.destroy();
         res.redirect('/');
     } catch (err) {
