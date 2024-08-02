@@ -10,7 +10,7 @@ const reserveSchema = new mongoose.Schema({
     reservationID: Number
 })
 
-reserveSchema.plugin(AutoIncrement, { inc_field: 'reservationID', start_seq: 1002 });
+reserveSchema.plugin(AutoIncrement, { inc_field: 'reservationID', start_seq: 1017 });
 const Reservation = mongoose.model('Reservation', reserveSchema)
 
 module.exports = Reservation
