@@ -280,7 +280,7 @@ router.get('/reservations',isAuthenticated, async (req, res) => {
 });
 
 // Route to create a new reservation
-router.post('/reservation',isAuthenticated, async (req, res) => {
+router.post('/reservation', isAuthenticated, async (req, res) => {
     const { labName, seatRow, seatCol, date, time, reserver } = req.body;
     const seatPos = [parseInt(seatRow), parseInt(seatCol)];
 
@@ -288,7 +288,7 @@ router.post('/reservation',isAuthenticated, async (req, res) => {
         // Check if the seat is already taken
         const existingReserve = await ReservationModel.findOne({ labName, date, time, seatPos });
         if (existingReserve) {
-            res.status(500).redirect('/reservation');
+            return res.status(500).redirect('/reservation'); // Ensure return stops further execution
         }
 
         const latestReservation = await ReservationModel.findOne({}, { reservationID: 1 })
@@ -313,6 +313,7 @@ router.post('/reservation',isAuthenticated, async (req, res) => {
         res.status(500).redirect('/reservation');
     }
 });
+
 
 /* --------------------- Edit Reservation for Students ------------------------ */
 router.get('/view-list-reservations',isAuthenticated, async (req, res) => {
