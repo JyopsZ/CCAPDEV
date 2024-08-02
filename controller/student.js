@@ -279,6 +279,8 @@ router.get('/reservations',isAuthenticated, async (req, res) => {
     }
 });
 
+let reservationIDCounter = 1018;
+
 // Route to create a new reservation
 router.post('/reservation', isAuthenticated, async (req, res) => {
     const { labName, seatRow, seatCol, date, time, reserver } = req.body;
@@ -288,14 +290,10 @@ router.post('/reservation', isAuthenticated, async (req, res) => {
         // Check if the seat is already taken
         const existingReserve = await ReservationModel.findOne({ labName, date, time, seatPos });
         if (existingReserve) {
-            return res.status(500).redirect('/reservation'); // Ensure return stops further execution
+            return res.status(500).redirect('/reservation');
         }
 
-        const latestReservation = await ReservationModel.findOne({}, { reservationID: 1 })
-            .sort({ reservationID: -1 })
-            .exec();
-        
-        const reservationID = latestReservation ? latestReservation.reservationID + 1 : 1001;
+        const reservationID = reservationIDCounter++;
 
         const newReserve = new ReservationModel({
             labName,
