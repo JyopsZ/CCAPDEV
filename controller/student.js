@@ -283,7 +283,9 @@ router.get('/reservations',isAuthenticated, async (req, res) => {
 router.post('/reservation',isAuthenticated, async (req, res) => {
     const { labName, seatRow, seatCol, date, time, reserver } = req.body;
     const seatPos = [parseInt(seatRow), parseInt(seatCol)];
-    const reservationID = Math.floor(Math.random() * 10000); // Generate a random reservation ID
+
+    const latestReservation = await ReservationModel.findOne().sort({ reservationID: -1 });
+    const reservationID = latestReservation ? latestReservation.reservationID + 1 : 1000;
 
     try {
         // Check if the seat is already taken
