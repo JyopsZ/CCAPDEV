@@ -58,6 +58,8 @@ router.get('/register', function(req, res) {
 	//res.sendFile(path.join(__dirname + "\\" + "../public/register.html"));
 });
 
+let userIDCounter = 5013;
+
 router.post('/register', async (req, res) => {
     const { firstName, lastName, email, password, role } = req.body;
 
@@ -72,12 +74,15 @@ router.post('/register', async (req, res) => {
         const saltRounds = 10;
         const hashedPassword = await bcryptjs.hash(password, saltRounds);
 
+        const userID = userIDCounter++;
+
         const newUser = new User({
             firstName,
             lastName,
             email,
             password: hashedPassword,
-            role
+            role,
+            userID
         });
 
         await newUser.save();

@@ -279,7 +279,7 @@ router.get('/reservations',isAuthenticated, async (req, res) => {
     }
 });
 
-let reservationIDCounter = 1020;
+let reservationIDCounter = 1018;
 
 // Route to create a new reservation
 router.post('/reservation', isAuthenticated, async (req, res) => {
